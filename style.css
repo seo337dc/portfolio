@@ -116,6 +116,12 @@ body {
 .other-meta { font-size: 12px; color: var(--muted); font-weight: 400; }
 .other-card p { font-size: 13px; color: #374151; }
 
+.other-shots { display: flex; align-items: stretch; gap: 8px; margin-bottom: 14px; }
+.other-shots .shot-cell { flex: 1; min-width: 0; }
+.other-shots .shot-cell.narrow { flex: 0 0 32%; }
+.other-shots .diagram { margin: 0; height: 100%; object-fit: cover; }
+.other-shots .shot-placeholder.small { margin-bottom: 0; height: 100%; }
+
 /* FOOTER */
 .footer {
   text-align: center; padding: 80px 24px; background: var(--navy); color: white;
