@@ -111,7 +111,7 @@ body {
 }
 
 /* OTHER PROJECTS */
-.other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.other-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
 .other-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
 .other-meta { font-size: 12px; color: var(--muted); font-weight: 400; }
 .other-card p { font-size: 13px; color: #374151; }
