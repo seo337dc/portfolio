@@ -1,207 +1,563 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>서동찬 | Frontend Developer Portfolio</title>
-<link rel="stylesheet" href="style.css?v=5">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fbfbf9" />
+  <title>서동찬 · Frontend Developer</title>
+  <meta name="description" content="4년 이상 4개의 스타트업에서 프론트엔드 신규 서비스를 기획부터 구축, 운영까지 단독으로 책임져온 서동찬의 포트폴리오." />
+  <meta property="og:title" content="서동찬 · Frontend Developer" />
+  <meta property="og:description" content="4년차 프론트엔드 개발자 서동찬의 포트폴리오. SM Pay, Inote Money 등 실무·사이드 프로젝트 케이스 스터디." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/inote-dashboard.webp" />
+
+  <style>
+    :root {
+      --bg: #fbfbf9;
+      --surface: #ffffff;
+      --text: #14140f;
+      --muted: #6b6b63;
+      --border: #e6e5df;
+      --accent: #3b3bff;
+      --accent-soft: #ecebff;
+      --radius: 14px;
+      --maxw: 960px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard",
+        "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(180%) blur(12px);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    header.scrolled { border-bottom-color: var(--border); }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-weight: 700; letter-spacing: -0.02em; font-size: 15px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color 0.2s var(--ease); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px;
+      background: var(--text); color: var(--bg) !important;
+      transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+    }
+    .nav-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border); border-radius: 10px;
+      width: 40px; height: 40px; cursor: pointer; align-items: center; justify-content: center;
+    }
+    .nav-toggle span { display: block; width: 18px; height: 2px; background: var(--text); position: relative; }
+    .nav-toggle span::before, .nav-toggle span::after {
+      content: ""; position: absolute; left: 0; width: 18px; height: 2px;
+      background: var(--text); transition: transform 0.25s var(--ease);
+    }
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+
+    /* SECTIONS */
+    section { padding: 96px 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+    }
+    .section-title { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .section-sub { color: var(--muted); max-width: 560px; margin-bottom: 48px; }
+
+    /* HERO */
+    .hero { padding: 120px 0 80px; }
+    .hero .badge {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--muted);
+      border: 1px solid var(--border); background: var(--surface); padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
+    .hero h1 { font-size: clamp(36px, 6.4vw, 60px); line-height: 1.14; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 24px; }
+    .hero h1 .accent { color: var(--accent); }
+    .hero p.lead { font-size: clamp(16px, 2.4vw, 19px); color: var(--muted); max-width: 620px; margin-bottom: 36px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;
+      padding: 13px 22px; border-radius: 999px; transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { background: var(--surface); border: 1px solid var(--border); }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--text); }
+
+    .stat .num { font-size: clamp(24px, 4vw, 32px); font-weight: 800; letter-spacing: -0.03em; }
+    .stat .label { font-size: 13px; color: var(--muted); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
+    .about-lead { font-size: 17px; }
+    .about-lead p + p { margin-top: 16px; }
+    .timeline { position: relative; padding-left: 26px; }
+    .timeline::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+    .tl-item { position: relative; padding-bottom: 34px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ""; position: absolute; left: -26px; top: 6px; width: 11px; height: 11px; border-radius: 50%;
+      background: var(--surface); border: 2px solid var(--accent);
+    }
+    .tl-period { font-size: 13px; color: var(--accent); font-weight: 600; }
+    .tl-role { font-size: 17px; font-weight: 700; margin: 4px 0 2px; }
+    .tl-company { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+    .tl-desc { font-size: 14px; color: var(--muted); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .skill-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px;
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .skill-card:hover { transform: translateY(-3px); border-color: var(--text); }
+    .skill-card h3 { font-size: 15px; margin-bottom: 14px; letter-spacing: -0.01em; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); }
+
+    /* CASE STUDY (SM Pay / Inote Money) */
+    .case-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+      padding: 40px clamp(20px, 4vw, 48px); margin-bottom: 32px;
+    }
+    .case-label { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; }
+    .case-title { font-size: clamp(21px, 3vw, 26px); font-weight: 700; letter-spacing: -0.02em; margin: 10px 0 28px; line-height: 1.4; }
+    .case-links { display: flex; flex-wrap: wrap; gap: 10px; margin: -8px 0 28px; }
+    .case-links .btn { padding: 9px 18px; font-size: 13.5px; }
+
+    .case-impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+    .case-impact .stat {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px 10px; text-align: center;
+    }
+    .case-impact .num { font-size: clamp(19px, 2.6vw, 23px); }
+
+    .narrative { margin-bottom: 36px; }
+    .narrative:last-of-type { margin-bottom: 0; }
+    .narrative h4 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+    .narrative p { font-size: 14.5px; color: #374151; margin-bottom: 10px; }
+    .narrative p .label { color: var(--text); font-weight: 700; }
+    .case-diagram { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); margin: 14px 0 4px; }
+    .case-caption { font-size: 11.5px; color: #b45309; margin-top: 2px; }
+
+    .case-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+    /* OTHER PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+    .project { display: flex; flex-direction: column; }
+    .other-shots { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px; }
+    .other-shots .shot-cell { flex: 1; min-width: 0; width: 100%; height: auto; display: block; border-radius: var(--radius); }
+    .other-shots .shot-cell.wide { flex: 0 0 77%; }
+    .other-shots .shot-cell.narrow { flex: 0 0 21%; }
+    .project .top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .project .yr { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .project h3 { font-size: 18px; letter-spacing: -0.02em; }
+    .project p { font-size: 14px; color: var(--muted); margin: 4px 0 16px; }
+    .project .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project .tags span { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; }
+
+    /* CONTACT */
+    .contact { text-align: center; }
+    .contact .section-title { font-size: clamp(28px, 5vw, 44px); }
+    .contact-mail {
+      display: inline-block; font-size: clamp(20px, 4vw, 30px); font-weight: 700; letter-spacing: -0.02em;
+      margin: 8px 0 32px; border-bottom: 2px solid transparent; transition: border-color 0.2s var(--ease);
+    }
+    .contact-mail:hover { border-bottom-color: var(--accent); }
+    .socials { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .social {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;
+      padding: 11px 20px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+      transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+    .social:hover { transform: translateY(-2px); border-color: var(--text); }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      section { padding: 72px 0; }
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 4px;
+        background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px 20px;
+        transform: translateY(-8px); opacity: 0; pointer-events: none;
+        transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+      }
+      .nav-links.open { transform: none; opacity: 1; pointer-events: auto; }
+      .nav-links a { padding: 8px 0; width: 100%; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .case-impact { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#top" class="logo">서동찬</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#smpay">SM Pay</a>
-      <a href="#inote">Inote Money</a>
-      <a href="#others">Other Projects</a>
-      <a href="#contact">Contact</a>
+  <header id="header">
+    <div class="wrap nav">
+      <a href="#home" class="logo">서동찬</a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#smpay">SMPay</a></li>
+        <li><a href="#projects">Other Projects</a></li>
+        <li><a href="#side-project">Side Project</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
     </div>
-  </div>
-</nav>
+  </header>
 
-<header id="top" class="hero">
-  <p class="eyebrow">PORTFOLIO</p>
-  <h1>서동찬</h1>
-  <p class="role">Frontend Developer</p>
-  <p class="statement">
-    4년 이상 4개의 스타트업에서 프론트엔드 신규 서비스를 기획부터 구축, 운영까지<br class="br-desktop">
-    단독으로 책임져왔습니다. 아래는 그중 가장 최근의, 가장 복잡했던 문제들을 다룬 기록입니다.
-  </p>
-  <div class="hero-links">
-    <a href="mailto:sdc337dc@gmail.com" class="btn btn-primary">이메일 보내기</a>
-    <a href="https://github.com/seo337dc" target="_blank" class="btn btn-ghost">GitHub</a>
-  </div>
-</header>
-
-<section id="about" class="section">
-  <h2 class="section-title"><span class="num">01</span> About</h2>
-  <div class="about-grid">
-    <p class="about-text">
-      기능보다 흐름을, 개발자 관점보다 사용자 관점을 먼저 생각하는 프론트엔드 개발자입니다.
-      2018년 SI 개발자로 커리어를 시작해 2020년 프론트엔드로 전향한 이후, 상태 관리 구조 개선,
-      모니터링 체계 구축, 리포트 자동화 기능을 여러 조직에서 반복적으로 설계하고 고도화해왔습니다.
-      최근에는 AI 도구를 활용해 프론트엔드 밖의 영역(백엔드, 인프라)까지 스스로 판단할 수 있는 범위를
-      넓혀가고 있습니다.
-    </p>
-    <div class="skills-compact">
-      <div class="skill-row"><span class="skill-label">Framework</span><span>React · Next.js · TypeScript</span></div>
-      <div class="skill-row"><span class="skill-label">State</span><span>React Query · Zustand · Recoil</span></div>
-      <div class="skill-row"><span class="skill-label">Infra</span><span>AWS · GitHub Actions · Sentry</span></div>
-      <div class="skill-row"><span class="skill-label">AI Tools</span><span>Claude Code · Cursor</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="work" class="section alt">
-  <h2 class="section-title"><span class="num">02</span> Work Experience</h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-period">2025.04 — 재직중</div>
-      <div class="timeline-body">
-        <div class="timeline-company">써치엠 <span>· 책임연구원</span></div>
-        <div class="timeline-desc">핀테크 광고 플랫폼 SM Pay 프론트엔드 단독 개발·운영</div>
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="wrap">
+        <span class="badge reveal"><span class="dot"></span> 써치엠 재직중 · SM Pay 프론트엔드 단독 개발</span>
+        <h1 class="reveal">
+          기능보다 흐름을,<br />
+          <span class="accent">사용자 관점을 먼저</span> 생각합니다
+        </h1>
+        <p class="lead reveal">
+          4년 이상 4개의 스타트업에서 프론트엔드 신규 서비스를 기획부터 구축, 운영까지
+          단독으로 책임져왔습니다. 아래는 그중 가장 최근의, 가장 복잡했던 문제들을 다룬 기록입니다.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#work" class="btn btn-primary">케이스 스터디 보기 →</a>
+          <a href="#contact" class="btn btn-ghost">연락하기</a>
+          <a href="https://glow-behavior-7ca.notion.site/My-Study-History-65227c8648e1419985dac1bb9b4b63df?pvs=73" target="_blank" rel="noopener" class="btn btn-ghost">Notion · 학습 기록</a>
+        </div>
       </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-period">2023.03 — 2024.04</div>
-      <div class="timeline-body">
-        <div class="timeline-company">컴퍼니위 / 애플트리 <span>· 연구원</span></div>
-        <div class="timeline-desc">B2B 에너지 플랫폼 ALFOZ, 백오피스 CEMS 개발</div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <span class="eyebrow reveal">About</span>
+        <h2 class="section-title reveal">경력과 이야기</h2>
+        <div class="about-grid">
+          <div class="about-lead reveal">
+            <p>
+              기능보다 흐름을, 개발자 관점보다 사용자 관점을 먼저 생각하는 프론트엔드 개발자입니다.
+              2018년 SI 개발자로 커리어를 시작해 2020년 프론트엔드로 전향한 이후, 상태 관리 구조 개선,
+              모니터링 체계 구축, 리포트 자동화 기능을 여러 조직에서 반복적으로 설계하고 고도화해왔습니다.
+            </p>
+            <p>
+              최근에는 AI 도구를 활용해 프론트엔드 밖의 영역(백엔드, 인프라)까지 스스로 판단할 수 있는
+              범위를 넓혀가고 있습니다.
+            </p>
+          </div>
+
+          <div class="timeline reveal">
+            <div class="tl-item">
+              <div class="tl-period">2025.04 — 재직중</div>
+              <div class="tl-role">써치엠 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 책임연구원</span></div>
+              <div class="tl-desc">핀테크 광고 플랫폼 SM Pay 프론트엔드 단독 개발·운영</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-period">2023.03 — 2024.04</div>
+              <div class="tl-role">컴퍼니위 / 애플트리 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 연구원</span></div>
+              <div class="tl-desc">B2B 에너지 플랫폼 ALFOZ, 백오피스 CEMS 개발</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-period">2022.01 — 2023.02</div>
+              <div class="tl-role">리코어 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 선임</span></div>
+              <div class="tl-desc">B2B 물류 플랫폼 Reware, 백오피스 CRM 개발</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-period">2020.11 — 2021.12</div>
+              <div class="tl-role">에이시지알 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 위원</span></div>
+              <div class="tl-desc">인적성 플랫폼, 내부 관리 백오피스 Noah's Ark 개발</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-period">2022.01 — 2023.02</div>
-      <div class="timeline-body">
-        <div class="timeline-company">리코어 <span>· 선임</span></div>
-        <div class="timeline-desc">B2B 물류 플랫폼 Reware, 백오피스 CRM 개발</div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap">
+        <span class="eyebrow reveal">Skills</span>
+        <h2 class="section-title reveal">기술 스택</h2>
+        <p class="section-sub reveal">현업에서 실제로 사용하며 익숙한 도구들입니다.</p>
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <h3>Framework</h3>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">TypeScript</span>
+            </div>
+          </div>
+          <div class="skill-card reveal">
+            <h3>State</h3>
+            <div class="chips">
+              <span class="chip">React Query</span>
+              <span class="chip">Zustand</span>
+              <span class="chip">Recoil</span>
+            </div>
+          </div>
+          <div class="skill-card reveal">
+            <h3>Infra</h3>
+            <div class="chips">
+              <span class="chip">AWS</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Sentry</span>
+            </div>
+          </div>
+          <div class="skill-card reveal">
+            <h3>AI Tools</h3>
+            <div class="chips">
+              <span class="chip">Claude Code</span>
+              <span class="chip">Cursor</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-period">2020.11 — 2021.12</div>
-      <div class="timeline-body">
-        <div class="timeline-company">에이시지알 <span>· 위원</span></div>
-        <div class="timeline-desc">인적성 플랫폼, 내부 관리 백오피스 Noah's Ark 개발</div>
+    </section>
+
+    <!-- CASE STUDY -->
+    <section id="work">
+      <div class="wrap">
+        <span class="eyebrow reveal">Case Study</span>
+        <h2 class="section-title reveal">가장 복잡했던 문제들</h2>
+        <p class="section-sub reveal">기획부터 구현, 트레이드오프 판단까지 직접 책임진 프로젝트입니다.</p>
+
+        <!-- SM PAY -->
+        <article class="case-card reveal" id="smpay">
+          <p class="case-label">SM PAY · 써치엠 · 2025.04 ~ 재직중</p>
+          <h3 class="case-title">핀테크 광고 플랫폼의 배포 구조를 다시 설계하다</h3>
+
+          <div class="case-impact">
+            <div class="stat"><div class="num">30~40%↓</div><div class="label">전체 배포 시간</div></div>
+            <div class="stat"><div class="num">70%↓</div><div class="label">에러 원인 파악 시간</div></div>
+            <div class="stat"><div class="num">100→0%</div><div class="label">ARS 인증 실패율</div></div>
+          </div>
+
+          <div class="narrative">
+            <h4>모노레포 전환 — 코드 중복을 구조로 해결하다</h4>
+            <p><span class="label">배경</span> — 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
+            <p><span class="label">판단</span> — pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
+            <p><span class="label">트레이드오프</span> — 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
+            <img src="assets/diagram-monorepo.webp" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram" loading="lazy">
+            <p class="case-caption">⚠ 재현 다이어그램 — 실제 레포 구조·패키지명은 예시로 재구성</p>
+          </div>
+
+          <div class="narrative">
+            <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
+            <p><span class="label">배경</span> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
+            <p><span class="label">해결</span> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
+            <img src="assets/diagram-ars.webp" alt="ARS 인증 흐름 다이어그램" class="case-diagram" loading="lazy">
+            <p class="case-caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
+          </div>
+
+          <div class="narrative">
+            <h4>프론트엔드 모니터링 체계 — 단계적으로 고도화하다</h4>
+            <p><span class="label">배경</span> — FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
+            <p><span class="label">해결</span> — CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
+            <img src="assets/diagram-monitoring.webp" alt="모니터링 대시보드 개념 목업" class="case-diagram" loading="lazy">
+            <p class="case-caption">⚠ 재현 목업 — 실제 데이터·화면 아님</p>
+          </div>
+
+          <div class="case-tags">
+            <span class="chip">Next.js</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Turborepo</span>
+            <span class="chip">NextAuth</span>
+            <span class="chip">Sentry</span>
+            <span class="chip">AWS</span>
+          </div>
+        </article>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- CASE STUDY 1: SM PAY -->
-<section id="smpay" class="section case-study">
-  <h2 class="section-title"><span class="num">03</span> Case Study</h2>
-  <p class="case-label">SM PAY · 써치엠 · 2025.04 ~ 재직중</p>
-  <h3 class="case-title">핀테크 광고 플랫폼의 배포 구조를 다시 설계하다</h3>
-
-  <div class="impact-row">
-    <div class="impact-box"><div class="num">30~40%↓</div><div class="desc">전체 배포 시간</div></div>
-    <div class="impact-box"><div class="num">70%↓</div><div class="desc">에러 원인 파악 시간</div></div>
-    <div class="impact-box"><div class="num">100→0%</div><div class="desc">ARS 인증 실패율</div></div>
-  </div>
-
-  <div class="narrative-block">
-    <h4>모노레포 전환 — 코드 중복을 구조로 해결하다</h4>
-    <p><b>배경</b> — 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
-    <p><b>판단</b> — pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
-    <p><b>트레이드오프</b> — 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
-    <img src="assets/diagram-monorepo.png" alt="모노레포 Before/After 구조 다이어그램" class="diagram">
-    <p class="caption">⚠ 재현 다이어그램 — 실제 레포 구조·패키지명은 예시로 재구성</p>
-  </div>
-
-  <div class="narrative-block">
-    <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
-    <p><b>배경</b> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
-    <p><b>해결</b> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
-    <img src="assets/diagram-ars.png" alt="ARS 인증 흐름 다이어그램" class="diagram">
-    <p class="caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
-  </div>
-
-  <div class="narrative-block">
-    <h4>프론트엔드 모니터링 체계 — 단계적으로 고도화하다</h4>
-    <p><b>배경</b> — FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
-    <p><b>해결</b> — CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
-    <img src="assets/diagram-monitoring.png" alt="모니터링 대시보드 개념 목업" class="diagram">
-    <p class="caption">⚠ 재현 목업 — 실제 데이터·화면 아님</p>
-  </div>
-
-  <div class="tags">
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>Next.js</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>TypeScript</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.9906 4.1957c-4.2998 0-7.7981 3.501-7.7981 7.8043s3.4983 7.8043 7.7981 7.8043c4.2999 0 7.7982-3.501 7.7982-7.8043s-3.4983-7.8043-7.7982-7.8043m0 11.843c-2.229 0-4.0356-1.8079-4.0356-4.0387s1.8065-4.0387 4.0356-4.0387S16.0262 9.7692 16.0262 12s-1.8065 4.0388-4.0356 4.0388m.6534-13.1249V0C18.9726.3386 24 5.5822 24 12s-5.0274 11.66-11.356 12v-2.9139c4.7167-.3372 8.4516-4.2814 8.4516-9.0861s-3.735-8.749-8.4516-9.0861M5.113 17.9586c-1.2502-1.4446-2.0562-3.2845-2.2-5.3046H0c.151 2.8266 1.2808 5.3917 3.051 7.3668l2.0606-2.0622zM11.3372 24v-2.9139c-2.02-.1439-3.8584-.949-5.3019-2.2018l-2.0606 2.0623c1.975 1.773 4.538 2.9022 7.361 3.0534z"/></svg>Turborepo</span>
-    <span class="tag">NextAuth</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.91 2.505c-.873-1.448-2.972-1.448-3.844 0L6.904 7.92a15.478 15.478 0 0 1 8.53 12.811h-2.221A13.301 13.301 0 0 0 5.784 9.814l-2.926 5.06a7.65 7.65 0 0 1 4.435 5.848H2.194a.365.365 0 0 1-.298-.534l1.413-2.402a5.16 5.16 0 0 0-1.614-.913L.296 19.275a2.182 2.182 0 0 0 .812 2.999 2.24 2.24 0 0 0 1.086.288h6.983a9.322 9.322 0 0 0-3.845-8.318l1.11-1.922a11.47 11.47 0 0 1 4.95 10.24h5.915a17.242 17.242 0 0 0-7.885-15.28l2.244-3.845a.37.37 0 0 1 .504-.13c.255.14 9.75 16.708 9.928 16.9a.365.365 0 0 1-.327.543h-2.287c.029.612.029 1.223 0 1.831h2.297a2.206 2.206 0 0 0 1.922-3.31z"/></svg>Sentry</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167zM21.698 16.207c-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.272-.351 3.384 1.963 7.559 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.439-.2.814.287.383.607zM22.792 14.961c-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.57.695-2.994z"/></svg>AWS</span>
-  </div>
-</section>
-
-<!-- CASE STUDY 2: INOTE MONEY -->
-<section id="inote" class="section case-study alt">
-  <p class="case-label">INOTE MONEY · 개인 프로젝트 · 2026.05 ~ 진행중</p>
-  <h3 class="case-title">AI와 함께, 혼자서 프론트엔드 밖의 영역까지</h3>
-
-  <div class="hero-links" style="justify-content: flex-start; margin: 16px auto 24px;">
-    <a href="https://github.com/seo337dc/inote-money" target="_blank" class="btn btn-ghost">GitHub</a>
-    <a href="https://inote-money.vercel.app/" target="_blank" class="btn btn-primary">배포 사이트</a>
-    <a href="https://glow-behavior-7ca.notion.site/Inote-money-35ab5151f22f8048b08cdc6ee8c38253" target="_blank" class="btn btn-ghost">노션 문서</a>
-  </div>
-
-  <img src="assets/inote-dashboard.png" alt="iNote Money 자산 관리 대시보드 화면" class="diagram" style="display: block; margin-bottom: 30px;">
-
-  <div class="impact-row">
-    <div class="impact-box"><div class="num">20개+</div><div class="desc">API 설계·구현</div></div>
-    <div class="impact-box"><div class="num">6개</div><div class="desc">Prisma 테이블 설계</div></div>
-    <div class="impact-box"><div class="num">3곳</div><div class="desc">프로덕션 배포</div></div>
-  </div>
-
-  <div class="narrative-block">
-    <p><b>배경</b> — 4년간 프론트엔드만 다뤄오면서, 백엔드·인프라 판단은 항상 다른 사람의 몫이었습니다. 이 경계를 스스로 넘어보고 싶어 가계부·자산관리 서비스를 기획하고, Next.js(FE)와 NestJS(BE)를 완전히 분리한 실무형 구조로 직접 만들기 시작했습니다.</p>
-    <p><b>판단</b> — 혼자 모든 걸 다루려 하기보다, AI와의 협업 자체를 구조화했습니다. Claude Code는 아키텍처 설계와 구현을, Cursor는 구현 이후 QA와 코드 리뷰를 전담하도록 역할을 분리해 운영했습니다.</p>
-    <p><b>막힌 지점</b> — FE(Vercel)와 BE(Render)를 서로 다른 도메인에 배포하면서 크로스 도메인 쿠키 인증 문제에 부딪혔고, AI와 함께 원인을 추적하며 해결했습니다.</p>
-  </div>
-
-  <div class="tags">
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>Next.js</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.131.047c-.173 0-.334.037-.483.087.316.21.49.49.576.806.007.043.019.074.025.117a.681.681 0 0 1 .013.112c.024.545-.143.614-.26.936-.18.415-.13.861.086 1.22a.74.74 0 0 0 .074.137c-.235-1.568 1.073-1.803 1.314-2.293.019-.428-.334-.713-.613-.911a1.37 1.37 0 0 0-.732-.21zM16.102.4c-.024.143-.006.106-.012.18-.006.05-.006.112-.012.161-.013.05-.025.1-.044.149-.012.05-.03.1-.05.149l-.067.142c-.02.025-.031.05-.05.075l-.037.055a2.152 2.152 0 0 1-.093.124c-.037.038-.068.081-.112.112v.006c-.037.031-.074.068-.118.1-.13.099-.278.173-.415.266-.043.03-.087.056-.124.093a.906.906 0 0 0-.118.099c-.043.037-.074.074-.111.118-.031.037-.068.08-.093.124a1.582 1.582 0 0 0-.087.13c-.025.05-.043.093-.068.142-.019.05-.037.093-.05.143a2.007 2.007 0 0 0-.043.155c-.006.025-.006.056-.012.08-.007.025-.007.05-.013.075 0 .05-.006.105-.006.155 0 .037 0 .074.006.111 0 .05.006.1.019.155.006.05.018.1.03.15.02.049.032.098.05.148.013.03.031.062.044.087l-1.426-.552c-.241-.068-.477-.13-.719-.186l-.39-.093c-.372-.074-.75-.13-1.128-.167-.013 0-.019-.006-.031-.006A11.082 11.082 0 0 0 8.9 2.855c-.378.025-.756.074-1.134.136a12.45 12.45 0 0 0-.837.174l-.279.074c-.092.037-.18.08-.266.118l-.205.093c-.012.006-.024.006-.03.012-.063.031-.118.056-.174.087a2.738 2.738 0 0 0-.236.118c-.043.018-.086.043-.124.062a.559.559 0 0 1-.055.03c-.056.032-.112.063-.162.094a1.56 1.56 0 0 0-.148.093c-.044.03-.087.055-.124.086-.006.007-.013.007-.019.013-.037.025-.08.056-.118.087l-.012.012-.093.074c-.012.007-.025.019-.037.025-.031.025-.062.056-.093.08-.006.013-.019.02-.025.025-.037.038-.074.069-.111.106-.007 0-.007.006-.013.012a1.742 1.742 0 0 0-.111.106c-.007.006-.007.012-.013.012a1.454 1.454 0 0 0-.093.1c-.012.012-.03.024-.043.036a1.374 1.374 0 0 1-.106.112c-.006.012-.018.019-.024.03-.05.05-.093.1-.143.15l-.018.018c-.1.106-.205.211-.317.304-.111.1-.229.192-.347.273a3.777 3.777 0 0 1-.762.421c-.13.056-.267.106-.403.149-.26.056-.527.161-.756.18-.05 0-.105.012-.155.018l-.155.037-.149.056c-.05.019-.099.044-.148.068-.044.031-.093.056-.137.087a1.011 1.011 0 0 0-.124.106c-.043.03-.087.074-.124.111-.037.043-.074.08-.105.124-.031.05-.068.093-.093.143a1.092 1.092 0 0 0-.087.142c-.025.056-.05.106-.068.161-.019.05-.037.106-.056.161-.012.05-.025.1-.03.15 0 .005-.007.012-.007.018-.012.056-.012.13-.019.167C.006 7.95 0 7.986 0 8.03a.657.657 0 0 0 .074.31v.006c.019.037.044.075.069.112.024.037.05.074.08.111.031.031.068.069.106.1a.906.906 0 0 0 .117.099c.149.13.186.173.378.272.031.019.062.031.1.05.006 0 .012.006.018.006 0 .013 0 .019.006.031a1.272 1.272 0 0 0 .08.298c.02.037.032.074.05.111.007.013.013.025.02.031.024.05.049.093.073.137l.093.13c.031.037.069.08.106.118.037.037.074.068.118.105 0 0 .006.006.012.006.037.031.074.062.112.087a.986.986 0 0 0 .136.08c.043.025.093.05.142.069a.73.73 0 0 0 .124.043c.007.006.013.006.025.012.025.007.056.013.08.019-.018.335-.024.65.026.762.055.124.328-.254.6-.688-.036.428-.061.93 0 1.079.069.155.44-.329.763-.862 4.395-1.016 8.405 2.02 8.826 6.31-.08-.67-.905-1.041-1.283-.948-.186.458-.502 1.047-1.01 1.413.043-.41.025-.83-.062-1.24a4.009 4.009 0 0 1-.769 1.562c-.588.043-1.177-.242-1.487-.67-.025-.018-.031-.055-.05-.08-.018-.043-.037-.087-.05-.13a.515.515 0 0 1-.037-.13c-.006-.044-.006-.087-.006-.137v-.093a.992.992 0 0 1 .031-.13c.013-.043.025-.086.044-.13.024-.043.043-.087.074-.13.105-.298.105-.54-.087-.682a.706.706 0 0 0-.118-.062c-.024-.006-.055-.018-.08-.025l-.05-.018a.847.847 0 0 0-.13-.031.472.472 0 0 0-.13-.019 1.01 1.01 0 0 0-.136-.012c-.031 0-.062.006-.093.006a.484.484 0 0 0-.137.019c-.043.006-.086.012-.13.024a1.068 1.068 0 0 0-.13.044c-.043.018-.08.037-.124.056-.037.018-.074.043-.118.062-1.444.942-.582 3.148.403 3.787-.372.068-.75.148-.855.229l-.013.012c.267.161.546.298.837.416.397.13.818.247 1.004.297v.006a5.996 5.996 0 0 0 1.562.112c2.746-.192 4.996-2.281 5.405-5.033l.037.161c.019.112.043.23.056.347v.006c.012.056.018.112.025.162v.024c.006.056.012.112.012.162.006.068.012.136.012.204v.1c0 .03.007.067.007.098 0 .038-.007.075-.007.112v.087c0 .043-.006.08-.006.124 0 .025 0 .05-.006.08 0 .044-.006.087-.006.137-.006.018-.006.037-.006.055l-.02.143c0 .019 0 .037-.005.056-.007.062-.019.118-.025.18v.012l-.037.174v.018l-.037.167c0 .007-.007.02-.007.025a1.663 1.663 0 0 1-.043.168v.018c-.019.062-.037.118-.05.174-.006.006-.006.012-.006.012l-.056.186c-.024.062-.043.118-.068.18-.025.062-.043.124-.068.18-.025.062-.05.117-.074.18h-.007c-.024.055-.05.117-.08.173a.302.302 0 0 1-.019.043c-.006.006-.006.013-.012.019a5.867 5.867 0 0 1-1.742 2.082c-.05.031-.099.069-.149.106-.012.012-.03.018-.043.03a2.603 2.603 0 0 1-.136.094l.018.037h.007l.26-.037h.006c.161-.025.322-.056.483-.087.044-.006.093-.019.137-.031l.087-.019c.043-.006.086-.018.13-.024.037-.013.074-.02.111-.031.62-.15 1.221-.354 1.798-.595a9.926 9.926 0 0 1-3.85 3.142c.714-.05 1.426-.167 2.114-.366a9.903 9.903 0 0 0 5.857-4.68 9.893 9.893 0 0 1-1.667 3.986 9.758 9.758 0 0 0 1.655-1.376 9.824 9.824 0 0 0 2.61-5.268c.21.98.272 1.99.18 2.987 4.474-6.241.371-12.712-1.346-14.416-.006-.013-.012-.019-.012-.031-.006.006-.006.006-.006.012 0-.006 0-.006-.007-.012 0 .074-.006.148-.012.223a8.34 8.34 0 0 1-.062.415c-.03.136-.068.273-.105.41-.044.13-.093.266-.15.396a5.322 5.322 0 0 1-.185.378 4.735 4.735 0 0 1-.477.688c-.093.111-.192.21-.292.31a3.994 3.994 0 0 1-.18.155l-.142.124a3.459 3.459 0 0 1-.347.241 4.295 4.295 0 0 1-.366.211c-.13.062-.26.118-.39.174a4.364 4.364 0 0 1-.818.223c-.143.025-.285.037-.422.05a4.914 4.914 0 0 1-.297.012 4.66 4.66 0 0 1-.422-.025 3.137 3.137 0 0 1-.421-.062 3.136 3.136 0 0 1-.415-.105h-.007c.137-.013.273-.025.41-.05a4.493 4.493 0 0 0 .818-.223c.136-.05.266-.112.39-.174.13-.062.248-.13.372-.204.118-.08.235-.161.347-.248.112-.087.217-.18.316-.279.105-.093.198-.198.291-.304.093-.111.18-.223.26-.334.013-.019.026-.044.038-.062.062-.1.124-.199.18-.298a4.272 4.272 0 0 0 .334-.775c.044-.13.075-.266.106-.403.025-.142.05-.278.062-.415.012-.142.025-.285.025-.421 0-.1-.007-.199-.013-.298a6.726 6.726 0 0 0-.05-.415 4.493 4.493 0 0 0-.092-.415c-.044-.13-.087-.267-.137-.397-.05-.13-.111-.26-.173-.384-.069-.124-.137-.248-.211-.366a6.843 6.843 0 0 0-.248-.34c-.093-.106-.186-.212-.285-.317a3.878 3.878 0 0 0-.161-.155c-.28-.217-.57-.421-.862-.607a1.154 1.154 0 0 0-.124-.062 2.415 2.415 0 0 0-.589-.26Z"/></svg>NestJS</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8068 18.2848L13.5528.7565c-.207-.4382-.639-.7273-1.1286-.7541-.5023-.0293-.9523.213-1.2062.6253L2.266 15.1271c-.2773.4518-.2718 1.0091.0158 1.4555l4.3759 6.7786c.2608.4046.7127.6388 1.1823.6388.1332 0 .267-.0188.3987-.0577l12.7019-3.7568c.3891-.1151.7072-.3904.8737-.7553s.1633-.7828-.0075-1.1454zm-1.8481.7519L9.1814 22.2242c-.3292.0975-.6448-.1873-.5756-.5194l3.8501-18.4386c.072-.3448.5486-.3996.699-.0803l7.1288 15.138c.1344.2856-.019.6224-.325.7128z"/></svg>Prisma</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Claude Code</span>
-    <span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg>Cursor</span>
-  </div>
-</section>
-
-<!-- OTHER PROJECTS -->
-<section id="others" class="section">
-  <h2 class="section-title"><span class="num">04</span> Other Projects</h2>
-  <div class="other-grid">
-    <div class="other-card">
-      <div class="other-shots">
-        <img src="assets/reware.png" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="diagram shot-cell wide">
-        <img src="assets/reware-mobile.png" alt="Reware 모바일 창고 탐색 화면" class="diagram shot-cell narrow">
+    <!-- OTHER PROJECTS -->
+    <section id="projects">
+      <div class="wrap">
+        <span class="eyebrow reveal">Other Projects</span>
+        <h2 class="section-title reveal">다른 회사 프로젝트</h2>
+        <div class="projects-grid">
+          <article class="project reveal">
+            <div class="other-shots">
+              <img src="assets/reware.webp" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="shot-cell wide" loading="lazy">
+              <img src="assets/reware-mobile.webp" alt="Reware 모바일 창고 탐색 화면" class="shot-cell narrow" loading="lazy">
+            </div>
+            <div class="top">
+              <h3>Reware</h3>
+              <span class="yr">리코어 · 2022</span>
+            </div>
+            <p>Redux → React Query + Recoil 전환으로 코드 가독성 40% 향상. 카카오맵 기반 창고 탐색 UX 개선.</p>
+            <div class="tags"><span>React Query</span><span>Recoil</span><span>카카오맵</span></div>
+          </article>
+          <article class="project reveal">
+            <div class="other-shots">
+              <img src="assets/afloz-main.webp" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="shot-cell" loading="lazy">
+              <img src="assets/afloz-dashboard.webp" alt="AFLOZ 센서 상세 대시보드 화면" class="shot-cell" loading="lazy">
+            </div>
+            <div class="top">
+              <h3>AFLOZ</h3>
+              <span class="yr">컴퍼니위 · 2023</span>
+            </div>
+            <p>B2B 에너지 대시보드 신규 구축 단독 담당. 실시간 에너지 사용량 시각화 UI 구현.</p>
+            <div class="tags"><span>React</span><span>대시보드</span><span>실시간 시각화</span></div>
+          </article>
+        </div>
       </div>
-      <h4>Reware <span class="other-meta">리코어 · 2022</span></h4>
-      <p>Redux → React Query + Recoil 전환으로 코드 가독성 40% 향상. 카카오맵 기반 창고 탐색 UX 개선.</p>
-    </div>
-    <div class="other-card">
-      <div class="other-shots">
-        <img src="assets/afloz-main.png" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="diagram shot-cell">
-        <img src="assets/afloz-dashboard.png" alt="AFLOZ 센서 상세 대시보드 화면" class="diagram shot-cell">
+    </section>
+
+    <!-- SIDE PROJECT: INOTE MONEY -->
+    <section id="side-project">
+      <div class="wrap">
+        <article class="case-card reveal">
+          <p class="case-label">INOTE MONEY · 개인 프로젝트 · 2026.05 ~ 진행중</p>
+          <h3 class="case-title">AI와 함께, 혼자서 프론트엔드 밖의 영역까지</h3>
+
+          <div class="case-links">
+            <a href="https://github.com/seo337dc/inote-money" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+            <a href="https://inote-money.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">배포 사이트</a>
+            <a href="https://glow-behavior-7ca.notion.site/Inote-money-35ab5151f22f8048b08cdc6ee8c38253" target="_blank" rel="noopener" class="btn btn-ghost">노션 문서</a>
+          </div>
+
+          <img src="assets/inote-dashboard.webp" alt="iNote Money 자산 관리 대시보드 화면" class="case-diagram" loading="lazy" style="margin-bottom:28px;">
+
+          <div class="case-impact">
+            <div class="stat"><div class="num">20개+</div><div class="label">API 설계·구현</div></div>
+            <div class="stat"><div class="num">6개</div><div class="label">Prisma 테이블 설계</div></div>
+            <div class="stat"><div class="num">3곳</div><div class="label">프로덕션 배포</div></div>
+          </div>
+
+          <div class="narrative">
+            <p><span class="label">배경</span> — 4년간 프론트엔드만 다뤄오면서, 백엔드·인프라 판단은 항상 다른 사람의 몫이었습니다. 이 경계를 스스로 넘어보고 싶어 가계부·자산관리 서비스를 기획하고, Next.js(FE)와 NestJS(BE)를 완전히 분리한 실무형 구조로 직접 만들기 시작했습니다.</p>
+            <p><span class="label">판단</span> — 혼자 모든 걸 다루려 하기보다, AI와의 협업 자체를 구조화했습니다. Claude Code는 아키텍처 설계와 구현을, Cursor는 구현 이후 QA와 코드 리뷰를 전담하도록 역할을 분리해 운영했습니다.</p>
+            <p><span class="label">막힌 지점</span> — FE(Vercel)와 BE(Render)를 서로 다른 도메인에 배포하면서 크로스 도메인 쿠키 인증 문제에 부딪혔고, AI와 함께 원인을 추적하며 해결했습니다.</p>
+          </div>
+
+          <div class="case-tags">
+            <span class="chip">Next.js</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">Prisma</span>
+            <span class="chip">Claude Code</span>
+            <span class="chip">Cursor</span>
+          </div>
+        </article>
       </div>
-      <h4>AFLOZ <span class="other-meta">컴퍼니위 · 2023</span></h4>
-      <p>B2B 에너지 대시보드 신규 구축 단독 담당. 실시간 에너지 사용량 시각화 UI 구현.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="justify-content:center;">Contact</span>
+        <h2 class="section-title reveal">함께 일해요</h2>
+        <p class="section-sub reveal" style="margin-left:auto;margin-right:auto;">
+          새로운 기회나 협업 제안, 언제든 편하게 연락 주세요.
+        </p>
+        <a href="mailto:sdc337dc@gmail.com" class="contact-mail reveal">sdc337dc@gmail.com</a>
+        <div class="socials reveal">
+          <a href="https://github.com/seo337dc" target="_blank" rel="noopener" class="social">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> 서동찬. Built with plain HTML, CSS &amp; JS.
     </div>
-  </div>
-</section>
+  </footer>
 
-<footer id="contact" class="footer">
-  <h2>Contact</h2>
-  <p>새로운 기회나 협업 제안, 언제든 편하게 연락 주세요.</p>
-  <div class="hero-links">
-    <a href="mailto:sdc337dc@gmail.com" class="btn btn-primary">sdc337dc@gmail.com</a>
-    <a href="https://github.com/seo337dc" target="_blank" class="btn btn-ghost">GitHub</a>
-  </div>
-  <p class="footer-note">010-2397-9875</p>
-</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
+    const header = document.getElementById("header");
+    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    toggle.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    links.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => links.classList.remove("open"))
+    );
+
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealEls.forEach((el) => io.observe(el));
+
+    const navMap = {};
+    document.querySelectorAll(".nav-links a").forEach((a) => {
+      const id = a.getAttribute("href").replace("#", "");
+      if (id) navMap[id] = a;
+    });
+    const sections = Object.keys(navMap)
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            Object.values(navMap).forEach((a) => a.classList.remove("active"));
+            const active = navMap[e.target.id];
+            if (active) active.classList.add("active");
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach((s) => spy.observe(s));
+  </script>
 </body>
 </html>
