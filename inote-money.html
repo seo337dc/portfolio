@@ -156,9 +156,29 @@
       display: flex; align-items: center; justify-content: center; overflow: hidden;
       transition: height 0.25s var(--ease);
     }
-    .shot-frame-media:has(img.shot-mobile.active) { height: 720px; }
+    .shot-frame-media:has(.shot-mobile.active) { height: 720px; }
     .shot-frame-media img { display: none; max-width: 100%; max-height: 100%; width: auto; height: auto; }
     .shot-frame-media img.active { display: block; }
+
+    /* CAROUSEL (모바일 화면이 여러 장일 때 화살표/점으로 전환) */
+    .shot-frame-media .shot-carousel { display: none; }
+    .shot-frame-media .shot-carousel.active {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; width: 100%; height: 100%; touch-action: pan-y;
+    }
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.92); color: var(--text); font-size: 16px; line-height: 1;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(28, 25, 23, 0.1);
+    }
+    .carousel-arrow:hover { background: #fff; }
+    .carousel-arrow.prev { left: 10px; }
+    .carousel-arrow.next { right: 10px; }
+    .carousel-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 6px; }
+    .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; padding: 0; }
+    .carousel-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
     /* HERO META (개발/범위/함께 요약 정보) */
     .hero-meta { display: flex; flex-wrap: wrap; gap: 28px 40px; margin-top: 32px; }
@@ -251,6 +271,7 @@
         <a href="#intro">기획 의도</a>
         <a href="#dashboard">대시보드</a>
         <a href="#account-book">가계부</a>
+        <a href="#stocks">주식</a>
         <a href="#roadmap">방향성 &amp; 로드맵</a>
       </nav>
       <div class="links">
@@ -356,7 +377,18 @@
                 </div>
                 <div class="shot-frame-media">
                   <img id="ledger-shot-desktop" src="assets/account-book-desktop.webp" alt="가계부 달력 뷰 데스크탑 화면" class="active" loading="lazy">
-                  <img id="ledger-shot-mobile" src="assets/account-book-mobile.webp" alt="가계부 달력 뷰 모바일 화면" class="shot-mobile" loading="lazy">
+                  <div id="ledger-shot-mobile" class="shot-carousel shot-mobile">
+                    <img src="assets/account-book-mobile-1.webp" alt="가계부 요약 대시보드 모바일 화면" class="carousel-slide active" loading="lazy">
+                    <img src="assets/account-book-mobile-2.webp" alt="가계부 달력 뷰 모바일 화면" class="carousel-slide" loading="lazy">
+                    <img src="assets/account-book-mobile-3.webp" alt="가계부 전체 로그 모바일 화면" class="carousel-slide" loading="lazy">
+                    <button type="button" class="carousel-arrow prev" aria-label="이전 화면">‹</button>
+                    <button type="button" class="carousel-arrow next" aria-label="다음 화면">›</button>
+                    <div class="carousel-dots">
+                      <button type="button" class="carousel-dot active" aria-label="1번 화면: 요약 대시보드"></button>
+                      <button type="button" class="carousel-dot" aria-label="2번 화면: 달력"></button>
+                      <button type="button" class="carousel-dot" aria-label="3번 화면: 전체 로그"></button>
+                    </div>
+                  </div>
                 </div>
               </figure>
             </div>
@@ -375,7 +407,43 @@
         </div>
       </section>
 
-      <!-- 다음 기능 섹션 추가 위치 (주식 · 미니게임 등) — 위 DASHBOARD/ACCOUNT BOOK 블록을 복사해서 사용하세요 -->
+      <!-- STOCKS (주식) -->
+      <section id="stocks" class="feature-section">
+        <!-- <span class="ghost-word" aria-hidden="true">Stocks</span> -->
+        <div class="wrap">
+          <div class="feature-grid">
+            <div class="feature-media reveal">
+              <div class="shot-toggle" role="tablist" aria-label="화면 종류 선택">
+                <button type="button" class="shot-toggle-btn active" data-target="stocks-shot-desktop">데스크탑</button>
+                <button type="button" class="shot-toggle-btn" data-target="stocks-shot-mobile">모바일</button>
+              </div>
+              <figure class="shot-frame">
+                <div class="shot-frame-bar">
+                  <i></i><i></i><i></i>
+                  <span class="shot-frame-url">inote.money</span>
+                </div>
+                <div class="shot-frame-media">
+                  <img id="stocks-shot-desktop" src="assets/stocks-desktop.webp" alt="주식 화면 데스크탑 화면" class="active" loading="lazy">
+                  <img id="stocks-shot-mobile" src="assets/stocks-mobile.webp" alt="주식 화면 모바일 화면" class="shot-mobile" loading="lazy">
+                </div>
+              </figure>
+            </div>
+            <div class="feature-text reveal">
+              <h2>주식</h2>
+              <div class="fill-note">
+                <span class="fn-label">설명</span>
+                <p>보유 중인 국내·해외 종목과 환율을 한 화면에서 확인할 수 있어요. 국내 주식은 실시간 캔들 차트로, 해외 주식은 TradingView 차트로 가격 흐름을 바로 볼 수 있어요.</p>
+              </div>
+              <div class="fill-note">
+                <span class="fn-label">마지막 목표</span>
+                <p>단순히 시세를 보여주는 걸 넘어서, AI가 내 포트폴리오를 분석해 주식 관리를 직접 전달해주는 것. "이 종목 비중이 높아졌으니 조정해보세요", "이 타이밍엔 추가 매수보다 관망이 나아요" 처럼, AI가 매니저처럼 먼저 판단하고 알려주는 주식 화면이 되는 게 목표예요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 다음 기능 섹션 추가 위치 (미니게임 등) — 위 DASHBOARD/ACCOUNT BOOK/STOCKS 블록을 복사해서 사용하세요 -->
 
       <!-- ROADMAP -->
       <section id="roadmap" class="roadmap-section">
@@ -429,8 +497,45 @@
         const frame = group.nextElementSibling;
         const target = frame && frame.querySelector("#" + btn.dataset.target);
         if (!target) return;
-        target.parentElement.querySelectorAll("img").forEach((img) => img.classList.remove("active"));
+        target.parentElement.querySelectorAll(":scope > *").forEach((el) => el.classList.remove("active"));
         target.classList.add("active");
+      });
+    });
+
+    // 모바일 스크린샷 슬라이드 (여러 장일 때 화살표/점/스와이프로 전환)
+    document.querySelectorAll(".shot-carousel").forEach((carousel) => {
+      const slides = Array.from(carousel.querySelectorAll(".carousel-slide"));
+      const dots = Array.from(carousel.querySelectorAll(".carousel-dot"));
+      let index = slides.findIndex((s) => s.classList.contains("active"));
+      if (index < 0) index = 0;
+
+      function show(i) {
+        index = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle("active", idx === index));
+        dots.forEach((d, idx) => d.classList.toggle("active", idx === index));
+      }
+
+      carousel.querySelector(".carousel-arrow.prev")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        show(index - 1);
+      });
+      carousel.querySelector(".carousel-arrow.next")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        show(index + 1);
+      });
+      dots.forEach((d, idx) => d.addEventListener("click", (e) => {
+        e.stopPropagation();
+        show(idx);
+      }));
+
+      let startX = null;
+      carousel.addEventListener("pointerdown", (e) => { startX = e.clientX; });
+      carousel.addEventListener("pointerup", (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) < 30) return;
+        show(dx < 0 ? index + 1 : index - 1);
       });
     });
 
