@@ -272,6 +272,7 @@
         <a href="#dashboard">대시보드</a>
         <a href="#account-book">가계부</a>
         <a href="#stocks">주식</a>
+        <a href="#mini-game">미니게임</a>
         <a href="#roadmap">방향성 &amp; 로드맵</a>
       </nav>
       <div class="links">
@@ -443,7 +444,41 @@
         </div>
       </section>
 
-      <!-- 다음 기능 섹션 추가 위치 (미니게임 등) — 위 DASHBOARD/ACCOUNT BOOK/STOCKS 블록을 복사해서 사용하세요 -->
+      <!-- MINI GAME (캐시플로우) -->
+      <section id="mini-game" class="feature-section flip">
+        <!-- <span class="ghost-word" aria-hidden="true">CASHFLOW</span> -->
+        <div class="wrap">
+          <div class="feature-grid">
+            <div class="feature-media reveal">
+              <div class="shot-toggle" role="tablist" aria-label="화면 종류 선택">
+                <button type="button" class="shot-toggle-btn active" data-target="game-shot-desktop">데스크탑</button>
+                <button type="button" class="shot-toggle-btn" data-target="game-shot-mobile">모바일</button>
+              </div>
+              <figure class="shot-frame">
+                <div class="shot-frame-bar">
+                  <i></i><i></i><i></i>
+                  <span class="shot-frame-url">inote.money</span>
+                </div>
+                <div class="shot-frame-media">
+                  <img id="game-shot-desktop" src="assets/mini-game-desktop.webp" alt="미니게임 캐시플로우 데스크탑 화면" class="active" loading="lazy">
+                  <img id="game-shot-mobile" src="assets/mini-game-mobile.webp" alt="미니게임 캐시플로우 모바일 화면" class="shot-mobile" loading="lazy">
+                </div>
+              </figure>
+            </div>
+            <div class="feature-text reveal">
+              <h2>미니게임 (캐시플로우)</h2>
+              <div class="fill-note">
+                <span class="fn-label">설명</span>
+                <p>보드게임 형식으로 직업을 선택해 월급·부채·지출을 관리하며 쥐경주(Rat Race)를 탈출하는 게임이에요. 주사위를 굴려 투자·지출·시장 기회 칸을 지나며 자산을 불리고, 은행 대출과 재무제표로 실제 자산 관리 흐름을 체험할 수 있어요.</p>
+              </div>
+              <div class="fill-note">
+                <span class="fn-label">마지막 목표</span>
+                <p>게임이 끝나면 AI가 내 플레이 결과를 분석해서, 어떤 선택이 좋았고 어떤 게 아쉬웠는지 짚어주는 것. "대출을 너무 늘렸다", "투자 타이밍이 늦었다" 같은 피드백을 통해, 게임 안에서의 선택이 실제 자산 관리 개념으로 자연스럽게 이어지도록 조언해주는 게 목표예요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ROADMAP -->
       <section id="roadmap" class="roadmap-section">
