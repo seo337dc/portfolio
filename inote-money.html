@@ -212,11 +212,13 @@
     .feature-text .desc { font-size: 15px; color: #374151; margin-bottom: 20px; }
 
     /* ROADMAP */
-    .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .roadmap-section .wrap { max-width: 1440px; }
+    .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
     .roadmap-item {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px;
     }
-    .roadmap-item h3 { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .roadmap-item h3 { font-size: 14px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .roadmap-item .fill-note p { font-size: 16px; line-height: 1.7; }
 
     footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
 
@@ -489,15 +491,15 @@
           <div class="roadmap-grid">
             <div class="roadmap-item reveal">
               <h3>Next</h3>
-              <div class="fill-note"><p>다음 iNote 시리즈 계획을 적어주세요.</p></div>
+              <div class="fill-note"><p>iNote는 원래 노트 앱에서 출발했고, 이 자산관리 앱은 그 확장판이에요. 다음 목표는 원조 iNote 노트 앱을 실제로 만드는 것입니다.</p></div>
             </div>
             <div class="roadmap-item reveal">
               <h3>Goal</h3>
-              <div class="fill-note"><p>이 앱을 어디까지 발전시키고 싶은지 적어주세요.</p></div>
+              <div class="fill-note"><p>웹을 넘어 앱으로 전환하고, AI를 적용해서 사용자가 실제로 돈을 잘 관리하고 자산을 불려나갈 수 있도록 돕는 것이 목표예요.</p></div>
             </div>
             <div class="roadmap-item reveal">
               <h3>Tech</h3>
-              <div class="fill-note"><p>기술적으로 더 해보고 싶은 것을 적어주세요.</p></div>
+              <div class="fill-note"><p>지금은 서버 구조가 단순한 편이라, Java·Python 등 다른 백엔드 스택도 경험해보고 DB 설계·인프라·LLM 연동·보안까지 폭넓게 고도화해보고 싶어요.</p></div>
             </div>
           </div>
         </div>
