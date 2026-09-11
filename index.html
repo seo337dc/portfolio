@@ -607,7 +607,7 @@
           <div class="narrative">
             <p><span class="label">배경</span> — AI 모델을 활용해 LLM을 붙이고, 이를 학습시켜 블로그 요약·할 일 자동 체크 등 다양한 기능을 수행하는 agent AI로 발전시키는 것이 목표입니다.</p>
             <p><span class="label">작업</span> — 기존 inote-server(NestJS)는 그대로 유지하고, Python + Groq(추후 유료 모델로 교체 예정) 기반으로 LLM 전용 서버를 별도로 구성했습니다.</p>
-            <p><span class="label">막힌 지점</span> — LLM 전용 서버는 만들었지만 데이터를 어떻게 쌓을지가 관건입니다. 페이지마다 필요한 LLM 지침(컨텍스트)이 달라서, 이걸 어떤 구조·전략으로 관리할지 계속 테스트하는 중입니다.</p>
+            <p><span class="label">구현</span> — Groq API로 SSE 스트리밍 채팅을 구축해 응답을 실시간으로 흘려보내도록 만들었습니다. 사용자가 지금 작성 중인 글의 제목·카테고리를 매 요청마다 함께 보내 LLM이 "지금 쓰고 있는 글"을 인지한 채로 대화하도록 프롬프트 구조를 설계했고, 대화는 글쓰기 세션·일반 세션으로 나눠 저장하고 검색까지 붙였습니다.</p>
           </div>
 
           <div class="skills-grid">
@@ -637,11 +637,11 @@
               </div>
             </div>
             <div class="skill-card reveal">
-              <h3>AI <span style="font-weight:500;color:var(--muted);">(예정)</span></h3>
+              <h3>AI</h3>
               <div class="chips">
                 <span class="chip">Python</span>
                 <span class="chip">FastAPI</span>
-                <span class="chip">pgvector</span>
+                <span class="chip">pgvector <span style="font-weight:500;color:var(--muted);">(예정)</span></span>
                 <span class="chip">Groq API</span>
               </div>
             </div>
