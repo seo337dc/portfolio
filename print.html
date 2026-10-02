@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fbfbf9" />
-  <title>서동찬 · Frontend Developer</title>
-  <meta name="description" content="B2B 서비스에서 상태관리·인증 문제를 해결해온 프론트엔드 개발자 서동찬의 포트폴리오." />
-  <meta property="og:title" content="서동찬 · Frontend Developer" />
-  <meta property="og:description" content="B2B 서비스에서 상태관리·인증 문제를 해결해온 프론트엔드 개발자 서동찬의 포트폴리오. SM Pay, Inote Money 등 실무·사이드 프로젝트 케이스 스터디." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/inote-dashboard.webp" />
+  <title>서동찬 · Frontend Developer (PDF)</title>
+  <meta name="robots" content="noindex" />
 
   <style>
     :root {
@@ -172,15 +168,6 @@
     .case-diagram { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); margin: 14px 0 4px; }
     .case-diagram.narrow { max-width: 320px; margin-left: auto; margin-right: auto; }
     .case-caption { font-size: 11.5px; color: #b45309; margin-top: 2px; }
-    .shot-view-media { height: 400px; display: flex; align-items: center; justify-content: center; }
-    .shot-view-media img { display: none; width: auto; height: auto; max-width: 100%; max-height: 100%; }
-    .shot-view-media img.active { display: block; }
-    .shot-view-tabs { display: flex; justify-content: center; gap: 8px; margin: 12px 0 20px; }
-    .shot-view-tab {
-      font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 999px;
-      border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer;
-    }
-    .shot-view-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .wip-badge {
       display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin-left: 8px;
       font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
@@ -246,24 +233,83 @@
       .skills-grid { grid-template-columns: 1fr; }
       .case-impact { grid-template-columns: 1fr; }
     }
+  
+
+    /* ===== PDF/PRINT PAGE OVERRIDES ===== */
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+
+    .pdf-toolbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 24px; background: #14140f; color: #fff;
+    }
+    .pdf-toolbar a { font-size: 13px; color: #cfcfc7; }
+    .pdf-toolbar a:hover { color: #fff; }
+    .pdf-toolbar button {
+      font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 999px;
+      background: var(--accent); color: #fff; border: none; cursor: pointer;
+    }
+    .pdf-toolbar button:hover { opacity: 0.9; }
+
+    header.print-header {
+      position: static; backdrop-filter: none; background: transparent; border-bottom: 1px solid var(--border);
+    }
+    header.print-header .nav { justify-content: flex-start; }
+
+    /* buttons/links aren't clickable in a printed document, so drop them */
+    .hero-actions, .case-links, .socials { display: none; }
+
+    @media print {
+      .pdf-toolbar { display: none; }
+      header.print-header { display: none; }
+      body { background: #fff; }
+      section { padding: 32px 0; }
+      .case-card { margin-bottom: 20px; }
+      a[href]:after { content: ""; }
+    }
+
+    .skill-card, .tl-item, .other-shots, .case-impact {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* keep a section's heading glued to the content right after it,
+       so the heading never sits alone at the bottom of a page */
+    .eyebrow, .section-title, .section-sub,
+    .case-label, .case-title,
+    .skill-card h3, .narrative h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    /* short sections should move to the next page as one block
+       rather than starting with only their heading at the bottom */
+    #skills, #contact {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Case Study is too long to keep whole, so just always start it
+       on a fresh page instead of letting the heading get orphaned */
+    #work, #side-project {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    @page { margin: 16mm 14mm; }
+
   </style>
 </head>
 <body>
-  <header id="header">
+  <div class="pdf-toolbar">
+    <a href="index.html">← 메인 포트폴리오로 돌아가기</a>
+    <button type="button" onclick="window.print()">PDF로 저장 / 인쇄</button>
+  </div>
+
+  <header id="header" class="print-header">
     <div class="wrap nav">
       <a href="#home" class="logo">서동찬</a>
-      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
-        <span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#smpay">SMPay</a></li>
-        <li><a href="#projects">Other Projects</a></li>
-        <li><a href="#side-project">Side Projects</a></li>
-        <li><a href="print.html" target="_blank" rel="noopener">PDF 다운로드</a></li>
-        <li><a href="#contact" class="nav-cta">Contact</a></li>
-      </ul>
     </div>
   </header>
 
@@ -402,7 +448,7 @@
             <p><span class="label">배경</span> — 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
             <p><span class="label">판단</span> — pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
             <p><span class="label">트레이드오프</span> — 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
-            <img src="assets/diagram-monorepo.webp" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-monorepo.webp" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 레포 구조·패키지명은 예시로 재구성</p>
           </div>
 
@@ -410,7 +456,7 @@
             <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
             <p><span class="label">배경</span> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
             <p><span class="label">해결</span> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
-            <img src="assets/diagram-ars.webp" alt="ARS 인증 흐름 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-ars.webp" alt="ARS 인증 흐름 다이어그램" class="case-diagram">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
           </div>
 
@@ -418,7 +464,7 @@
             <h4>프론트엔드 모니터링 체계 — 단계적으로 고도화하다</h4>
             <p><span class="label">배경</span> — FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
             <p><span class="label">해결</span> — CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
-            <img src="assets/diagram-monitoring.webp" alt="모니터링 대시보드 개념 목업" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-monitoring.webp" alt="모니터링 대시보드 개념 목업" class="case-diagram">
             <p class="case-caption">⚠ 재현 목업 — 실제 데이터·화면 아님</p>
           </div>
 
@@ -443,9 +489,9 @@
             <p><span class="label">현재 상태</span> — 일부 페이지에 프로토타입을 적용해 동작을 검증했으며, 프로덕션 반영 전 단계입니다. 페이지별로 API 스펙이 상이해, LLM이 각 페이지의 API 컨텍스트를 정확히 이해하고 적절한 파라미터로 호출하도록 만드는 것이 핵심 과제입니다.</p>
             <p><span class="label">목표</span> — 사용자가 UI를 조작하는 대신, 채팅창에 원하는 작업을 말하는 것만으로 페이지 내 작업을 완료할 수 있는 경험을 제공하는 것입니다.</p>
             <p><span class="label">최종 목표</span> — 유료 AI API를 활용하여 모든 작업을 AI로 대체할 수 있도록 하는 것입니다.</p>
-            <img src="assets/diagram-nl-interface.svg" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-nl-interface.svg" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 API·페이지 구조는 예시로 재구성</p>
-            <img src="assets/ai-prompt.webp" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow" loading="lazy">
+            <img src="assets/ai-prompt.webp" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow">
             <p class="case-caption">💬 실제 프로토타입 대화 화면 — 테스트 데이터 사용</p>
           </div>
 
@@ -467,16 +513,7 @@
           <p class="case-label">REWARE · 리코어 · 2022</p>
           <h3 class="case-title">카카오맵 기반 창고 탐색 플랫폼, 상태 관리 구조 전환</h3>
 
-          <div class="shot-view">
-            <div class="shot-view-media">
-              <img src="assets/reware.webp" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="case-diagram active" data-view="pc" loading="lazy">
-              <img src="assets/reware-mobile.webp" alt="Reware 모바일 창고 탐색 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
-            </div>
-            <div class="shot-view-tabs">
-              <button type="button" class="shot-view-tab active" data-target="pc">PC버전</button>
-              <button type="button" class="shot-view-tab" data-target="mobile">모바일버전</button>
-            </div>
-          </div>
+          <img src="assets/reware.webp" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="case-diagram" style="margin-bottom:28px;">
 
           <div class="narrative">
             <p>Redux → React Query + Recoil 전환으로 상태 흐름을 단순화하고 신규 기능 개발 속도를 개선했습니다. 카카오맵 기반 창고 탐색 UX도 함께 개선했습니다.</p>
@@ -497,8 +534,8 @@
           <h3 class="case-title">B2B 에너지 대시보드 신규 구축</h3>
 
           <div class="other-shots">
-            <img src="assets/afloz-main.webp" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="shot-cell" loading="lazy">
-            <img src="assets/afloz-dashboard.webp" alt="AFLOZ 센서 상세 대시보드 화면" class="shot-cell" loading="lazy">
+            <img src="assets/afloz-main.webp" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="shot-cell">
+            <img src="assets/afloz-dashboard.webp" alt="AFLOZ 센서 상세 대시보드 화면" class="shot-cell">
           </div>
 
           <div class="narrative">
@@ -534,7 +571,7 @@
             <a href="https://glow-behavior-7ca.notion.site/Inote-money-35ab5151f22f8048b08cdc6ee8c38253" target="_blank" rel="noopener" class="btn btn-ghost">노션 문서</a>
           </div>
 
-          <img src="assets/inote-dashboard.webp" alt="iNote Money 자산 관리 대시보드 화면" class="case-diagram" loading="lazy" style="margin-bottom:28px;">
+          <img src="assets/inote-dashboard.webp" alt="iNote Money 자산 관리 대시보드 화면" class="case-diagram" style="margin-bottom:28px;">
 
           <div class="case-impact">
             <div class="stat"><div class="num">30개+</div><div class="label">API 설계·구현</div></div>
@@ -594,16 +631,7 @@
             <a href="https://inote-main.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost">배포 사이트</a>
           </div>
 
-          <div class="shot-view">
-            <div class="shot-view-media">
-              <img src="assets/inote-desktop.webp" alt="iNote 학습 노트 데스크탑 화면" class="case-diagram active" data-view="pc" loading="lazy">
-              <img src="assets/inote-mobile.webp" alt="iNote 학습 노트 모바일 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
-            </div>
-            <div class="shot-view-tabs">
-              <button type="button" class="shot-view-tab active" data-target="pc">PC버전</button>
-              <button type="button" class="shot-view-tab" data-target="mobile">모바일버전</button>
-            </div>
-          </div>
+          <img src="assets/inote-desktop.webp" alt="iNote 학습 노트 데스크탑 화면" class="case-diagram" style="margin-bottom:28px;">
 
           <div class="narrative">
             <p><span class="label">배경</span> — AI 모델을 활용해 LLM을 붙이고, 이를 학습시켜 블로그 요약·할 일 자동 체크 등 다양한 기능을 수행하는 agent AI로 발전시키는 것이 목표입니다.</p>
@@ -668,6 +696,7 @@
           새로운 기회나 협업 제안, 언제든 편하게 연락 주세요.
         </p>
         <a href="mailto:sdc337dc@gmail.com" class="contact-mail reveal">sdc337dc@gmail.com</a>
+        <p style="margin-top:12px;font-size:15px;">포트폴리오 링크 — <a href="https://seo337dc.github.io/portfolio/" style="text-decoration:underline;">https://seo337dc.github.io/portfolio/</a></p>
         <div class="socials reveal">
           <a href="https://github.com/seo337dc" target="_blank" rel="noopener" class="social">GitHub</a>
         </div>
@@ -677,75 +706,8 @@
 
   <footer>
     <div class="wrap">
-      © <span id="year"></span> 서동찬. Built with plain HTML, CSS &amp; JS.
+      © 2026 서동찬. Built with plain HTML, CSS &amp; JS.
     </div>
   </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const header = document.getElementById("header");
-    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    document.querySelectorAll(".shot-view").forEach((view) => {
-      const tabs = view.querySelectorAll(".shot-view-tab");
-      const imgs = view.querySelectorAll("img[data-view]");
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((t) => t.classList.remove("active"));
-          tab.classList.add("active");
-          imgs.forEach((img) => img.classList.toggle("active", img.dataset.view === tab.dataset.target));
-        });
-      });
-    });
-
-    const toggle = document.getElementById("navToggle");
-    const links = document.getElementById("navLinks");
-    toggle.addEventListener("click", () => {
-      const open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-    links.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => links.classList.remove("open"))
-    );
-
-    const revealEls = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    revealEls.forEach((el) => io.observe(el));
-
-    const navMap = {};
-    document.querySelectorAll(".nav-links a").forEach((a) => {
-      const id = a.getAttribute("href").replace("#", "");
-      if (id) navMap[id] = a;
-    });
-    const sections = Object.keys(navMap)
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-    const spy = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            Object.values(navMap).forEach((a) => a.classList.remove("active"));
-            const active = navMap[e.target.id];
-            if (active) active.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" }
-    );
-    sections.forEach((s) => spy.observe(s));
-  </script>
 </body>
 </html>
