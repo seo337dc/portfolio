@@ -39,7 +39,7 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { max-width: 100%; height: auto; display: block; }
     ::selection { background: var(--accent); color: #fff; }
 
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
@@ -417,7 +417,7 @@
             <p><span class="label">배경</span> — 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
             <p><span class="label">판단</span> — pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
             <p><span class="label">트레이드오프</span> — 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
-            <img src="assets/diagram-monorepo.webp" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-monorepo.webp" width="1842" height="845" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram" loading="lazy">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 레포 구조·패키지명은 예시로 재구성</p>
           </div>
 
@@ -425,7 +425,7 @@
             <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
             <p><span class="label">배경</span> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
             <p><span class="label">해결</span> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
-            <img src="assets/diagram-ars.webp" alt="ARS 인증 흐름 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-ars.webp" width="1760" height="865" alt="ARS 인증 흐름 다이어그램" class="case-diagram" loading="lazy">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
           </div>
 
@@ -433,7 +433,7 @@
             <h4>프론트엔드 모니터링 체계 — 단계적으로 고도화하다</h4>
             <p><span class="label">배경</span> — FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
             <p><span class="label">해결</span> — CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
-            <img src="assets/diagram-monitoring.webp" alt="모니터링 대시보드 개념 목업" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-monitoring.webp" width="1480" height="1105" alt="모니터링 대시보드 개념 목업" class="case-diagram" loading="lazy">
             <p class="case-caption">⚠ 재현 목업 — 실제 데이터·화면 아님</p>
           </div>
 
@@ -458,9 +458,9 @@
             <p><span class="label">현재 상태</span> — 일부 페이지에 프로토타입을 적용해 동작을 검증했으며, 프로덕션 반영 전 단계입니다. 페이지별로 API 스펙이 상이해, LLM이 각 페이지의 API 컨텍스트를 정확히 이해하고 적절한 파라미터로 호출하도록 만드는 것이 핵심 과제입니다.</p>
             <p><span class="label">목표</span> — 사용자가 UI를 조작하는 대신, 채팅창에 원하는 작업을 말하는 것만으로 페이지 내 작업을 완료할 수 있는 경험을 제공하는 것입니다.</p>
             <p><span class="label">최종 목표</span> — 유료 AI API를 활용하여 모든 작업을 AI로 대체할 수 있도록 하는 것입니다.</p>
-            <img src="assets/diagram-nl-interface.svg" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram" loading="lazy">
+            <img src="assets/diagram-nl-interface.svg" width="1000" height="460" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram" loading="lazy">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 API·페이지 구조는 예시로 재구성</p>
-            <img src="assets/ai-prompt.webp" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow" loading="lazy">
+            <img src="assets/ai-prompt.webp" width="335" height="904" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow" loading="lazy">
             <p class="case-caption">💬 실제 프로토타입 대화 화면 — 테스트 데이터 사용</p>
           </div>
 
@@ -484,8 +484,8 @@
 
           <div class="shot-view">
             <div class="shot-view-media">
-              <img src="assets/reware.webp" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="case-diagram active" data-view="pc" loading="lazy">
-              <img src="assets/reware-mobile.webp" alt="Reware 모바일 창고 탐색 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
+              <img src="assets/reware.webp" width="1914" height="968" alt="Reware 카카오맵 기반 창고 탐색 화면 (데스크탑)" class="case-diagram active" data-view="pc" loading="lazy">
+              <img src="assets/reware-mobile.webp" width="407" height="763" alt="Reware 모바일 창고 탐색 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
             </div>
             <div class="shot-view-tabs">
               <button type="button" class="shot-view-tab active" data-target="pc">PC버전</button>
@@ -512,8 +512,8 @@
           <h3 class="case-title">B2B 에너지 대시보드 신규 구축</h3>
 
           <div class="other-shots">
-            <img src="assets/afloz-main.webp" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="shot-cell" loading="lazy">
-            <img src="assets/afloz-dashboard.webp" alt="AFLOZ 센서 상세 대시보드 화면" class="shot-cell" loading="lazy">
+            <img src="assets/afloz-main.webp" width="1919" height="966" alt="AFLOZ 카카오맵 기반 창고 목록 화면" class="shot-cell" loading="lazy">
+            <img src="assets/afloz-dashboard.webp" width="1914" height="960" alt="AFLOZ 센서 상세 대시보드 화면" class="shot-cell" loading="lazy">
           </div>
 
           <div class="narrative">
@@ -550,8 +550,8 @@
 
           <div class="shot-view">
             <div class="shot-view-media">
-              <img src="assets/inote-desktop.webp" alt="iNote 학습 노트 데스크탑 화면" class="case-diagram active" data-view="pc" loading="lazy">
-              <img src="assets/inote-mobile.webp" alt="iNote 학습 노트 모바일 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
+              <img src="assets/inote-desktop.webp" width="1907" height="931" alt="iNote 학습 노트 데스크탑 화면" class="case-diagram active" data-view="pc" loading="lazy">
+              <img src="assets/inote-mobile.webp" width="393" height="845" alt="iNote 학습 노트 모바일 화면" class="case-diagram narrow" data-view="mobile" loading="lazy">
             </div>
             <div class="shot-view-tabs">
               <button type="button" class="shot-view-tab active" data-target="pc">PC버전</button>
@@ -643,7 +643,7 @@
             <a href="https://glow-behavior-7ca.notion.site/Inote-money-35ab5151f22f8048b08cdc6ee8c38253" target="_blank" rel="noopener" class="btn btn-ghost">노션 문서</a>
           </div>
 
-          <img src="assets/inote-dashboard.webp" alt="iNote Money 자산 관리 대시보드 화면" class="case-diagram" loading="lazy" style="margin-bottom:28px;">
+          <img src="assets/inote-dashboard.webp" width="1903" height="972" alt="iNote Money 자산 관리 대시보드 화면" class="case-diagram" loading="lazy" style="margin-bottom:28px;">
 
           <div class="case-impact">
             <div class="stat"><div class="num">30개+</div><div class="label">API 설계·구현</div></div>
