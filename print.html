@@ -369,7 +369,7 @@
               <div class="tl-desc">B2B 에너지 플랫폼 ALFOZ, 백오피스 CEMS 개발</div>
             </div>
             <div class="tl-item">
-              <div class="tl-period">2022.01 — 2023.01</div>
+              <div class="tl-period">2022.02 — 2023.02</div>
               <div class="tl-role">리코어 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 선임</span></div>
               <div class="tl-desc">B2B 물류 플랫폼 Reware, 백오피스 CRM 개발</div>
             </div>
@@ -377,6 +377,11 @@
               <div class="tl-period">2020.11 — 2021.12</div>
               <div class="tl-role">에이시지알 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 위원</span></div>
               <div class="tl-desc">인적성 플랫폼, 내부 관리 백오피스 Noah's Ark 개발</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-period">2018.02 — 2020.04</div>
+              <div class="tl-role">비컴솔루션 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 사원</span></div>
+              <div class="tl-desc">SK하이닉스 반도체 MES 구축·운영</div>
             </div>
           </div>
         </div>
@@ -440,7 +445,7 @@
           <div class="case-impact">
             <div class="stat"><div class="num">30~40%↓</div><div class="label">전체 배포 시간</div></div>
             <div class="stat"><div class="num">70%↓</div><div class="label">에러 원인 파악 시간</div></div>
-            <div class="stat"><div class="num">100→0%</div><div class="label">ARS 인증 실패율</div></div>
+            <div class="stat"><div class="num">6개</div><div class="label">공유 패키지 분리</div></div>
           </div>
 
           <div class="narrative">
@@ -453,9 +458,11 @@
           </div>
 
           <div class="narrative">
-            <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
-            <p><span class="label">배경</span> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
-            <p><span class="label">해결</span> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
+            <h4>모바일 ARS 인증 — 끊겨도 이어지는 구조로 바꾸다</h4>
+            <p><span class="label">배경</span> — 모바일 웹에서 ARS 인증을 위해 전화 앱으로 전환했다가 돌아오면, 인증 결과를 받지 못하는 문제가 있었습니다. 삼성 등 일부 기기의 정책상 앱 전환 시 브라우저의 폴링이 중단되고, 복귀할 때 페이지가 리로드되어 진행 중이던 인증 상태가 초기화되는 것이 원인이었습니다.</p>
+            <p><span class="label">시도</span> — 폴링이 끊기는 것 자체를 막기 위해 백엔드와 함께 WebSocket과 Web Worker 방식을 적용해봤지만, 기기 정책에 의한 중단은 프론트엔드에서 해결할 수 없다는 것을 확인했습니다.</p>
+            <p><span class="label">해결</span> — 연결을 유지하는 대신, 끊겨도 흐름을 복원하는 구조로 접근을 바꿨습니다. Next.js API Route 프록시가 백엔드 ARS API를 대신 호출해 결과를 저장하고, 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하도록 설계했습니다. localStorage 기반 상태 복구와 Custom Hook 동기화로 리로드 이후에도 인증 흐름이 이어지도록 보강했습니다.</p>
+            <p><span class="label">다음 판단</span> — 앱 전환에 의존하는 한 기기·브라우저 정책 변화에 계속 노출된다고 판단해, 앱 전환 자체가 필요 없는 문자 인증 방식으로의 전환을 기획하고 있습니다.</p>
             <img src="assets/diagram-ars.webp" alt="ARS 인증 흐름 다이어그램" class="case-diagram">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
           </div>
@@ -488,7 +495,7 @@
             <p><span class="label">접근</span> — 각 페이지에는 이미 특정 기능을 수행하는 API가 구축되어 있다는 점에 착안해, UI 조작 대신 자연어 대화로 그 페이지의 작업을 수행할 수 있는 구조를 설계했습니다. Groq API를 활용해 사용자의 자연어 요청을 해석하고, 해당 페이지에 이미 존재하는 API를 호출하도록 연결하는 방식입니다. 기존 UI를 대체하는 것이 아니라, 복잡한 이벤트 핸들러 체인을 자연어라는 더 단순한 인터페이스로 우회하는 접근입니다.</p>
             <p><span class="label">현재 상태</span> — 일부 페이지에 프로토타입을 적용해 동작을 검증했으며, 프로덕션 반영 전 단계입니다. 페이지별로 API 스펙이 상이해, LLM이 각 페이지의 API 컨텍스트를 정확히 이해하고 적절한 파라미터로 호출하도록 만드는 것이 핵심 과제입니다.</p>
             <p><span class="label">목표</span> — 사용자가 UI를 조작하는 대신, 채팅창에 원하는 작업을 말하는 것만으로 페이지 내 작업을 완료할 수 있는 경험을 제공하는 것입니다.</p>
-            <p><span class="label">최종 목표</span> — 유료 AI API를 활용하여 모든 작업을 AI로 대체할 수 있도록 하는 것입니다.</p>
+            <p><span class="label">최종 목표</span> — 사용 빈도가 높은 작업부터 자연어로 처리할 수 있는 범위를 넓혀가며, 페이지별 API 컨텍스트를 안정적으로 다룰 수 있는 구조를 만드는 것입니다.</p>
             <img src="assets/diagram-nl-interface.svg" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram">
             <p class="case-caption">⚠ 재현 다이어그램 — 실제 API·페이지 구조는 예시로 재구성</p>
             <img src="assets/ai-prompt.webp" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow">
