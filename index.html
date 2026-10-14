@@ -310,27 +310,27 @@
 
           <div class="timeline reveal">
             <div class="tl-item">
-              <div class="tl-period">2025.04 — 재직중</div>
+              <div class="tl-period">2025.04 ~ 재직중</div>
               <div class="tl-role">써치엠 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 책임연구원</span></div>
               <div class="tl-desc">핀테크 광고 플랫폼 SM Pay 프론트엔드 단독 개발·운영</div>
             </div>
             <div class="tl-item">
-              <div class="tl-period">2024.04 — 2025.03</div>
+              <div class="tl-period">2024.04 ~ 2025.03</div>
               <div class="tl-role">프리랜서 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 핀테크·커머스 플랫폼 개발</span></div>
               <div class="tl-desc">블록체인 결제·거래 플랫폼(One-Q, Love300), 중고차 렌트 플랫폼(SJ korea) 프론트엔드 개발</div>
             </div>
             <div class="tl-item">
-              <div class="tl-period">2023.03 — 2024.03</div>
+              <div class="tl-period">2023.03 ~ 2024.03</div>
               <div class="tl-role">컴퍼니위 / 애플트리 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 연구원</span></div>
               <div class="tl-desc">B2B 에너지 플랫폼 ALFOZ, 백오피스 CEMS 개발</div>
             </div>
             <div class="tl-item">
-              <div class="tl-period">2022.01 — 2023.01</div>
+              <div class="tl-period">2022.01 ~ 2023.01</div>
               <div class="tl-role">리코어 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 선임</span></div>
               <div class="tl-desc">B2B 물류 플랫폼 Reware, 백오피스 CRM 개발</div>
             </div>
             <div class="tl-item">
-              <div class="tl-period">2020.11 — 2021.12</div>
+              <div class="tl-period">2020.11 ~ 2021.12</div>
               <div class="tl-role">에이시지알 <span style="font-weight:400;color:var(--muted);font-size:14px;">· 위원</span></div>
               <div class="tl-desc">인적성 플랫폼, 내부 관리 백오피스 Noah's Ark 개발</div>
             </div>
@@ -413,28 +413,28 @@
           </div>
 
           <div class="narrative">
-            <h4>모노레포 전환 — 코드 중복을 구조로 해결하다</h4>
-            <p><span class="label">배경</span> — 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
-            <p><span class="label">판단</span> — pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
-            <p><span class="label">트레이드오프</span> — 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
+            <h4>모노레포 전환: 코드 중복을 구조로 해결하다</h4>
+            <p><span class="label">배경</span>: 서비스 앱과 어드민 앱을 별도 레포로 운영하며 시작했지만, 기능이 늘어날수록 컴포넌트·타입·API 인터셉터가 두 레포에 중복되기 시작했습니다.</p>
+            <p><span class="label">판단</span>: pnpm + Turborepo 기반 모노레포로 구조를 전환하고, 공유해야 할 것과 앱별로 남겨야 할 것을 먼저 구분했습니다.</p>
+            <p><span class="label">트레이드오프</span>: 전환 후 CI/CD가 각각 독립 빌드되며 이중 빌드 문제가 새로 생겨, Remote Cache와 git diff 기반 Selective Build로 해결했습니다.</p>
             <img src="assets/diagram-monorepo.webp" width="1842" height="845" alt="모노레포 Before/After 구조 다이어그램" class="case-diagram" loading="lazy">
-            <p class="case-caption">⚠ 재현 다이어그램 — 실제 레포 구조·패키지명은 예시로 재구성</p>
+            <p class="case-caption">⚠ 재현 다이어그램 · 실제 레포 구조·패키지명은 예시로 재구성</p>
           </div>
 
           <div class="narrative">
-            <h4>모바일 ARS 인증 실패 — 폴링을 서버로 이관하다</h4>
-            <p><span class="label">배경</span> — Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
-            <p><span class="label">해결</span> — Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
+            <h4>모바일 ARS 인증 실패: 폴링을 서버로 이관하다</h4>
+            <p><span class="label">배경</span>: Galaxy 등 일부 모바일 기기에서 전화 앱으로 전환하면 JS 실행이 정지되어 클라이언트 측 폴링이 끊기고, 인증 결과를 받지 못해 실패율 100%가 발생했습니다.</p>
+            <p><span class="label">해결</span>: Next.js API Route 프록시를 도입해 서버가 백엔드 ARS API를 대신 호출하고 결과를 저장하도록 구조를 변경했습니다. 클라이언트는 앱 복귀 후 attemptId로 결과만 조회하면 되도록 만들어, 폴링 자체를 서버로 이관했습니다.</p>
             <img src="assets/diagram-ars.webp" width="1760" height="865" alt="ARS 인증 흐름 다이어그램" class="case-diagram" loading="lazy">
-            <p class="case-caption">⚠ 재현 다이어그램 — 실제 코드·화면 미사용</p>
+            <p class="case-caption">⚠ 재현 다이어그램 · 실제 코드·화면 미사용</p>
           </div>
 
           <div class="narrative">
-            <h4>프론트엔드 모니터링 체계 — 단계적으로 고도화하다</h4>
-            <p><span class="label">배경</span> — FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
-            <p><span class="label">해결</span> — CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
+            <h4>프론트엔드 모니터링 체계: 단계적으로 고도화하다</h4>
+            <p><span class="label">배경</span>: FE 로그 관리가 없어 오류 발생 시 원인 파악이 어려웠고, Slack 알림 연동 후에도 메시지가 시간이 지나면 소실됐습니다.</p>
+            <p><span class="label">해결</span>: CloudWatch → Slack → Sentry 순으로 단계적으로 개선했습니다. 이벤트 한도를 고려해 GET을 제외한 POST/PUT/PATCH/DELETE와 FE 에러만 선별 수집하고, 발생 페이지·사용자 정보·Request/Response까지 노출되도록 커스터마이징했습니다.</p>
             <img src="assets/diagram-monitoring.webp" width="1480" height="1105" alt="모니터링 대시보드 개념 목업" class="case-diagram" loading="lazy">
-            <p class="case-caption">⚠ 재현 목업 — 실제 데이터·화면 아님</p>
+            <p class="case-caption">⚠ 재현 목업 · 실제 데이터·화면 아님</p>
           </div>
 
           <div class="case-tags">
@@ -450,18 +450,18 @@
         <!-- SM PAY: AI ASSISTANT -->
         <article class="case-card reveal" id="smpay-ai">
           <p class="case-label">SM PAY · 써치엠 · 2026.07 ~ 진행중</p>
-          <h3 class="case-title">관리자 UI — LLM 기반 자연어 인터페이스 <span class="wip-badge">진행 중</span></h3>
+          <h3 class="case-title">관리자 UI: LLM 기반 자연어 인터페이스 <span class="wip-badge">진행 중</span></h3>
 
           <div class="narrative">
-            <p><span class="label">배경</span> — SM Pay 관리자 페이지는 다양한 기능을 제공하지만, 그만큼 UI가 복잡하고 페이지마다 이벤트 핸들러가 많아 사용자가 원하는 작업을 하기까지 여러 단계의 조작이 필요했습니다. 클릭, 폼 입력, 필터링 등 반복적인 UI 조작이 사용자의 작업 효율을 떨어뜨리는 지점이었습니다.</p>
-            <p><span class="label">접근</span> — 각 페이지에는 이미 특정 기능을 수행하는 API가 구축되어 있다는 점에 착안해, UI 조작 대신 자연어 대화로 그 페이지의 작업을 수행할 수 있는 구조를 설계했습니다. Groq API를 활용해 사용자의 자연어 요청을 해석하고, 해당 페이지에 이미 존재하는 API를 호출하도록 연결하는 방식입니다. 기존 UI를 대체하는 것이 아니라, 복잡한 이벤트 핸들러 체인을 자연어라는 더 단순한 인터페이스로 우회하는 접근입니다.</p>
-            <p><span class="label">현재 상태</span> — 일부 페이지에 프로토타입을 적용해 동작을 검증했으며, 프로덕션 반영 전 단계입니다. 페이지별로 API 스펙이 상이해, LLM이 각 페이지의 API 컨텍스트를 정확히 이해하고 적절한 파라미터로 호출하도록 만드는 것이 핵심 과제입니다.</p>
-            <p><span class="label">목표</span> — 사용자가 UI를 조작하는 대신, 채팅창에 원하는 작업을 말하는 것만으로 페이지 내 작업을 완료할 수 있는 경험을 제공하는 것입니다.</p>
-            <p><span class="label">최종 목표</span> — 유료 AI API를 활용하여 모든 작업을 AI로 대체할 수 있도록 하는 것입니다.</p>
+            <p><span class="label">배경</span>: SM Pay 관리자 페이지는 다양한 기능을 제공하지만, 그만큼 UI가 복잡하고 페이지마다 이벤트 핸들러가 많아 사용자가 원하는 작업을 하기까지 여러 단계의 조작이 필요했습니다. 클릭, 폼 입력, 필터링 등 반복적인 UI 조작이 사용자의 작업 효율을 떨어뜨리는 지점이었습니다.</p>
+            <p><span class="label">접근</span>: 각 페이지에는 이미 특정 기능을 수행하는 API가 구축되어 있다는 점에 착안해, UI 조작 대신 자연어 대화로 그 페이지의 작업을 수행할 수 있는 구조를 설계했습니다. Groq API를 활용해 사용자의 자연어 요청을 해석하고, 해당 페이지에 이미 존재하는 API를 호출하도록 연결하는 방식입니다. 기존 UI를 대체하는 것이 아니라, 복잡한 이벤트 핸들러 체인을 자연어라는 더 단순한 인터페이스로 우회하는 접근입니다.</p>
+            <p><span class="label">현재 상태</span>: 일부 페이지에 프로토타입을 적용해 동작을 검증했으며, 프로덕션 반영 전 단계입니다. 페이지별로 API 스펙이 상이해, LLM이 각 페이지의 API 컨텍스트를 정확히 이해하고 적절한 파라미터로 호출하도록 만드는 것이 핵심 과제입니다.</p>
+            <p><span class="label">목표</span>: 사용자가 UI를 조작하는 대신, 채팅창에 원하는 작업을 말하는 것만으로 페이지 내 작업을 완료할 수 있는 경험을 제공하는 것입니다.</p>
+            <p><span class="label">최종 목표</span>: 유료 AI API를 활용하여 모든 작업을 AI로 대체할 수 있도록 하는 것입니다.</p>
             <img src="assets/diagram-nl-interface.svg" width="1000" height="460" alt="자연어 인터페이스 Before/After 흐름 다이어그램" class="case-diagram" loading="lazy">
-            <p class="case-caption">⚠ 재현 다이어그램 — 실제 API·페이지 구조는 예시로 재구성</p>
+            <p class="case-caption">⚠ 재현 다이어그램 · 실제 API·페이지 구조는 예시로 재구성</p>
             <img src="assets/ai-prompt.webp" width="335" height="904" alt="SM Pay AI 어시스턴트 프롬프트 대화 화면" class="case-diagram narrow" loading="lazy">
-            <p class="case-caption">💬 실제 프로토타입 대화 화면 — 테스트 데이터 사용</p>
+            <p class="case-caption">💬 실제 프로토타입 대화 화면 · 테스트 데이터 사용</p>
           </div>
 
           <div class="case-tags">
@@ -560,27 +560,35 @@
           </div>
 
           <div class="case-impact" id="inote-impact">
-            <div class="stat"><div class="num">68개</div><div class="label">BE API 설계·구현</div></div>
-            <div class="stat"><div class="num">10개</div><div class="label">AI API 설계·구현</div></div>
+            <div class="stat"><div class="num">72개</div><div class="label">BE API 설계·구현</div></div>
+            <div class="stat"><div class="num">12개</div><div class="label">AI API 설계·구현</div></div>
             <div class="stat"><div class="num">21개</div><div class="label">Prisma 테이블 설계</div></div>
-            <div class="stat"><div class="num">305개</div><div class="label">FE 테스트 작성</div></div>
+            <div class="stat"><div class="num">580개+</div><div class="label">FE 테스트 작성</div></div>
+          </div>
+
+                    <div class="narrative">
+            <p><span class="label">배경</span>: 기록 앱 iNote에 LLM을 붙여, 글 요약·할 일 자동 체크처럼 사용자의 기록을 이해하고 처리하는 Agent AI로 확장하는 프로젝트입니다.</p>
+            <p><span class="label">구조</span>: 기존 NestJS 서버(inote-server)는 그대로 두고, Python(FastAPI) + Groq 기반 LLM 서버를 별도로 분리했습니다. Groq은 추후 유료 모델로 교체할 예정입니다.</p>
+            <p><span class="label">구현</span>: SSE 스트리밍 채팅을 만들고, 작성 중인 글의 제목·카테고리를 요청마다 함께 보내 LLM이 "지금 쓰는 글"을 알고 답하도록 프롬프트를 설계했습니다. 대화는 글쓰기·일반 세션으로 나눠 저장하고 검색까지 붙였습니다. FE는 Vitest·Testing Library·MSW로 580개 이상의 테스트를 작성했고, 구현을 일부러 깨뜨려 테스트가 실패하는지 확인하는 변이 확인으로 검증합니다. 에디터(Tiptap) 표 편집 툴바와 카테고리 드래그 이동도 구현했습니다.</p>
           </div>
 
           <div class="narrative">
-            <p><span class="label">배경</span> — AI 모델을 활용해 LLM을 붙이고, 이를 학습시켜 블로그 요약·할 일 자동 체크 등 다양한 기능을 수행하는 agent AI로 발전시키는 것이 목표입니다.</p>
-            <p><span class="label">작업</span> — 기존 inote-server(NestJS)는 그대로 유지하고, Python + Groq(추후 유료 모델로 교체 예정) 기반으로 LLM 전용 서버를 별도로 구성했습니다.</p>
-            <p><span class="label">구현</span> — Groq API로 SSE 스트리밍 채팅을 구축해 응답을 실시간으로 흘려보내도록 만들었습니다. 사용자가 지금 작성 중인 글의 제목·카테고리를 매 요청마다 함께 보내 LLM이 "지금 쓰고 있는 글"을 인지한 채로 대화하도록 프롬프트 구조를 설계했고, 대화는 글쓰기 세션·일반 세션으로 나눠 저장하고 검색까지 붙였습니다. 최근에는 글쓰기 에디터(Tiptap)에 표 편집 툴바(행·열 추가/삭제, 셀 병합/분할, 표 삭제)를 추가했고, 카테고리 관리에 드래그 이동과 낙관적 업데이트를 적용했습니다. FE는 Vitest·Testing Library·MSW로 305개 테스트를 작성했고, 구현을 일부러 망가뜨려 테스트가 실패하는지 확인하는 방식(변이 확인)으로 검증하고 있습니다.</p>
+            <h4>LLM이 내 글을 근거로 답하게 하다: 비공개 글이 새지 않는 구조</h4>
+            <p><span class="label">배경</span>: 글이 쌓일수록 정리해 둔 글을 다시 찾기 어려웠습니다. 그래서 LLM이 질문과 관련된 내 글을 먼저 찾아 읽고, 그 글을 근거로 출처와 함께 답하게 만들었습니다(RAG). 관련 글은 한국어 임베딩 모델(KURE-v1)로 뜻이 비슷한 글을 찾으며, 모델은 별도 서비스로 분리하고 벡터는 AI DB(pgvector)에 저장합니다.</p>
+            <p><span class="label">판단</span>: LLM에 내 글을 읽히면 가장 큰 위험은 비공개 글이 다른 사람의 답변에 섞이는 것이라고 봤습니다.<br>공개 여부는 BE만 판정하고, LLM 쪽에는 "요청자가 볼 수 있는 글 id"만 넘겨 그 안에서만 찾게 했습니다. 응답은 BE가 한 번 더 걸러내고, 어느 단계가 실패해도 글 없이 일반 답변으로 넘어갑니다. 벡터에 공개 여부를 복사하지 않은 것도 같은 이유입니다. 동기화가 어긋나는 순간 그대로 유출되기 때문입니다. LLM 서버가 FE가 보낸 user_id를 그대로 신뢰하는 한계가 있어서, 1차는 공개 글만 근거로 씁니다.</p>
+            <p><span class="label">동작</span>: 질문이 들어오면 공개 글을 먼저 검색합니다. 기준 점수를 넘는 글이 있으면 그 글만 근거로 답하고 출처 카드를 붙입니다. 없으면 "내 글에는 관련 내용이 없어요"를 알린 뒤 일반 답변으로 넘어가, 근거 없는 내용을 내 글처럼 말하지 않게 했습니다. 대화는 화면별로 나뉘지만 히스토리 한 곳에 모아 뱃지로 구분합니다.</p>
+            <p><span class="label">결과</span>: 운영 환경에서 글을 비공개로 바꾸면 답변의 근거에서 빠지고, 다시 공개하면 돌아오는 것을 확인했습니다. 기준 점수는 실제 데이터로 보정했습니다. 같은 주제의 글이 0.55와 0.47로 갈려 한 편이 빠졌고, 관련 없는 글은 1등보다 0.09 이상 낮았습니다. 그래서 "1등과 0.09 이내인 글 함께 쓰기"와 "짧은 후속 질문은 앞 질문과 합쳐 검색"을 적용했습니다. 이 값은 임시이고 라벨링 평가로 확정할 예정이며, 글 목록 채팅 화면은 배포 대기 중입니다.</p>
           </div>
 
           <div class="narrative">
-            <h4>무료 호스팅 한도와 DB 이전 — 인프라를 다시 설계하다</h4>
-            <p><span class="label">배경</span> — Render 무료 플랜은 월 750시간 한도인데, BE와 AI 서버 두 개를 상시 깨워 두다 보니 이 한도를 초과했습니다.</p>
-            <p><span class="label">판단</span> — AI 서버만 Vercel(Python/FastAPI)로 옮기기로 했습니다. 대안으로 검토했던 Koyeb은 가입 시점에 무료 플랜이 없어 제외했습니다.</p>
-            <p><span class="label">트레이드오프</span> — DB도 Neon에서 Supabase로 옮기는 과정에서, Neon 무료 플랜의 콜드 스타트(약 5~6초)가 Prisma 기본 연결 타임아웃(약 5초)보다 길어 P1001 오류를 겪었습니다. 어긋나 있던 마이그레이션 3개를 테이블 21개 기준 단일 baseline으로 정리했는데, 배포 순서를 잘못 잡아 실패한 마이그레이션 기록이 새 마이그레이션을 막는 P3009 오류까지 겪었고, 원인을 추적해 해결했습니다.</p>
-            <p><span class="label">결과</span> — 백업 → COPY 복원 → 행 수·내용 해시 대조로 데이터를 옮겨 BE 195행, AI 21행 모두 일치함을 확인했습니다. 처음엔 AI 대화 DB를 BE DB에 합치려 했지만, 서버리스 AI 서버가 BE의 사용자·계정·글 데이터까지 읽을 수 있게 되는 권한 문제와 수명주기 차이 때문에 별도 Supabase 프로젝트로 분리하는 쪽으로 판단을 바꿨습니다.</p>
+            <h4>무료 호스팅 한도와 DB 이전: 인프라를 다시 설계하다</h4>
+            <p><span class="label">배경</span>: Render 무료 플랜의 월 750시간 한도를, BE와 AI 서버를 상시 가동하면서 초과했습니다.</p>
+            <p><span class="label">판단</span>: AI 서버만 Vercel(FastAPI)로 옮겼습니다. 검토했던 Koyeb은 무료 플랜이 없어 제외했습니다.</p>
+            <p><span class="label">트레이드오프</span>: DB를 Neon에서 Supabase로 옮기며 두 문제를 풀었습니다.<br>① Neon의 콜드 스타트(5~6초)가 Prisma 기본 타임아웃(5초)보다 길어 P1001이 발생했습니다.<br>② 어긋나 있던 마이그레이션 3개를 21개 테이블 기준 단일 baseline으로 정리하다, 배포 순서 실수로 실패 기록이 남아 P3009가 났고 원인을 추적해 해결했습니다.</p>
+            <p><span class="label">결과</span>: 백업 → COPY 복원 → 행 수·내용 해시 대조로 BE 195행, AI 21행이 모두 일치함을 확인했습니다. AI 대화 DB를 BE DB에 합치려던 계획은 접어서, 서버리스 AI 서버가 사용자·계정·글 데이터까지 읽게 되는 권한 문제와 수명주기 차이 때문에 별도 Supabase 프로젝트로 분리했습니다.</p>
           </div>
 
-          <div class="skills-grid">
+<div class="skills-grid">
             <div class="skill-card reveal">
               <h3>FE</h3>
               <div class="chips">
@@ -611,7 +619,8 @@
               <div class="chips">
                 <span class="chip">Python</span>
                 <span class="chip">FastAPI</span>
-                <span class="chip">pgvector <span style="font-weight:500;color:var(--muted);">(예정)</span></span>
+                <span class="chip">pgvector</span>
+                <span class="chip">KURE-v1</span>
                 <span class="chip">Groq API</span>
               </div>
             </div>
@@ -621,12 +630,13 @@
                 <span class="chip">Vercel <span style="font-weight:500;color:var(--muted);">(FE·AI)</span></span>
                 <span class="chip">Render <span style="font-weight:500;color:var(--muted);">(BE)</span></span>
                 <span class="chip">Supabase</span>
+                <span class="chip">Docker <span style="font-weight:500;color:var(--muted);">(KURE)</span></span>
               </div>
             </div>
           </div>
 
           <div class="narrative">
-            <p><span class="label">다음 과제</span> — 한국어 임베딩 모델(KURE-v1) 기반 기능입니다. 임베딩은 글을 "뜻이 비슷하면 가까운 숫자 묶음(벡터)"으로 바꾸는 방식으로, 이를 이용해 관련 글 추천 → 카테고리 제안·유사 글 알림 → 내 글 기반 AI 답변(RAG) 순으로 만들어 갈 계획입니다. 임베딩 서비스와 벡터 저장·동기화는 로컬에서 구현해, 비공개 글이 다른 사용자 결과에 나오지 않는 것까지 실제 데이터로 확인했고(운영 배포 전), 지금은 관련 글 추천 API를 만들고 있습니다. 공개 범위는 BE가 판정해 "요청자가 볼 수 있는 글 목록"만 AI에 넘기고 AI는 그 안에서만 순위를 매기는 구조라, AI가 후보 밖의 글을 돌려줄 수 없습니다. 다만 내 비공개 글까지 AI가 검색하려면 AI 서버가 요청자를 검증해야 하는데 현재는 FE가 전달한 user_id를 그대로 신뢰하고 있어, RAG에 앞서 인증 토큰 연동을 먼저 해결할 계획입니다.</p>
+            <p><span class="label">다음 과제</span>: ① AI 서버가 요청자를 검증하지 못하고 FE가 보낸 user_id를 그대로 신뢰하는 문제를 인증 토큰 연동으로 해결해야 내 비공개 글까지 검색 범위를 넓힐 수 있고, 로그인 없이 부를 수 있는 검색 API에는 호출 제한도 필요합니다. ② KURE는 지금 로컬 Docker를 터널로 연결해 검증한 상태라 호스팅 위치를 정해야 합니다. ③ 기준 점수를 라벨링 평가로 확정하고, 같은 임베딩으로 관련 글 추천 화면과 카테고리 제안·유사 글 알림을 이어 붙입니다.</p>
           </div>
         </article>
 
@@ -652,9 +662,9 @@
           </div>
 
           <div class="narrative">
-            <p><span class="label">배경</span> — 4년간 프론트엔드만 다뤄오면서, 백엔드·인프라 판단은 항상 다른 사람의 몫이었습니다. 이 경계를 스스로 넘어보고 싶어 가계부·자산관리 서비스를 기획하고, Next.js(FE)와 NestJS(BE)를 완전히 분리한 실무형 구조로 직접 만들기 시작했습니다.</p>
-            <p><span class="label">판단</span> — 혼자 모든 걸 다루려 하기보다, AI와의 협업 자체를 구조화했습니다. Claude Code는 아키텍처 설계와 구현을, Cursor는 구현 이후 QA와 코드 리뷰를 전담하도록 역할을 분리해 운영했습니다.</p>
-            <p><span class="label">막힌 지점</span> — FE(Vercel)와 BE(Render)를 서로 다른 도메인에 배포하면서 크로스 도메인 쿠키 인증 문제에 부딪혔고, AI와 함께 원인을 추적하며 해결했습니다.</p>
+            <p><span class="label">배경</span>: 4년간 프론트엔드만 다뤄오면서, 백엔드·인프라 판단은 항상 다른 사람의 몫이었습니다. 이 경계를 스스로 넘어보고 싶어 가계부·자산관리 서비스를 기획하고, Next.js(FE)와 NestJS(BE)를 완전히 분리한 실무형 구조로 직접 만들기 시작했습니다.</p>
+            <p><span class="label">판단</span>: 혼자 모든 걸 다루려 하기보다, AI와의 협업 자체를 구조화했습니다. Claude Code는 아키텍처 설계와 구현을, Cursor는 구현 이후 QA와 코드 리뷰를 전담하도록 역할을 분리해 운영했습니다.</p>
+            <p><span class="label">막힌 지점</span>: FE(Vercel)와 BE(Render)를 서로 다른 도메인에 배포하면서 크로스 도메인 쿠키 인증 문제에 부딪혔고, AI와 함께 원인을 추적하며 해결했습니다.</p>
           </div>
 
           <div class="skills-grid">
